@@ -1,0 +1,12 @@
+<script src="/assets/js/apexcharts.min.js"></script>
+<script src="/assets/js/fslightbox.js"></script>
+<script src="/assets/js/simplebar.min.js"></script>
+<script src="/assets/js/prism.js"></script>
+<script src="/assets/js/clipboard.min.js"></script>
+<script src="/assets/js/swiper-bundle.min.js"></script>
+<script src="/assets/js/fullcalendar.min.js"></script>
+<script src="/assets/js/jsvectormap.min.js"></script>
+<script src="/assets/js/world-merc.js"></script>
+<script src="/assets/js/quill.min.js"></script>
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/charts-custom.js"></script>

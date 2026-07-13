@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        @include('partials.front.styles')
+
+        <title>Trezo - Tailwind CSS Admin Dashboard Template</title>
+
+        @vite('resources/css/app.css')
+
+    </head>
+    <body>
+        @include('partials.dashboard.sidebar')
+        @include('partials.dashboard.header')
+
+        <div class="main-content transition-all flex flex-col overflow-hidden min-h-screen" id="main-content">
+
+            <!-- Breadcrumb -->
+            <div class="mb-[25px] md:flex items-center justify-between">
+                <h5 class="!mb-0">
+                    Seller Details
+                </h5>
+                <ol class="breadcrumb mt-[12px] md:mt-0">
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        <a href="/dashboard" class="inline-block relative ltr:pl-[22px] rtl:pr-[22px] transition-all hover:text-primary-500">
+                            <i class="material-symbols-outlined absolute ltr:left-0 rtl:right-0 !text-lg -mt-px text-primary-500 top-1/2 -translate-y-1/2">
+                                home
+                            </i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        eCommerce
+                    </li>
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        Sellers
+                    </li>
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        Seller Details
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Seller Overview -->
+            <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
+                <div class="trezo-card-header mb-[20px] flex items-center justify-between">
+                    <div class="trezo-card-title">
+                        <h5 class="!mb-0">
+                            Seller Overview
+                        </h5>
+                    </div>
+                </div>
+                <div class="trezo-card-content">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-[20px] sm:gap-[25px]">
+                        <div class="bg-primary-50 dark:bg-[#15203c] rounded-md py-[22px] px-[20px]">
+                            <div class="flex items-center">
+                                <div class="text-primary-500 leading-none ltr:mr-[10px] rtl:ml-[10px]">
+                                    <i class="material-symbols-outlined !text-5xl">
+                                        settings_account_box
+                                    </i>
+                                </div>
+                                <div>
+                                    <span class="block">
+                                        Total Orders
+                                    </span>
+                                    <h5 class="!mb-0 !text-[20px] mt-[2px]">
+                                        7051
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="mt-[15px] sm:mt-[25px] flex items-center justify-between">
+                                <span class="block text-sm">
+                                    Orders this month
+                                </span>
+                                <span class="inline-block text-sm text-success-700 py-[1px] px-[8.3px] border border-success-300 bg-success-100 dark:bg-dark dark:border-dark rounded-xl">
+                                    +0.75%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-orange-50 dark:bg-[#15203c] rounded-md py-[22px] px-[20px]">
+                            <div class="flex items-center">
+                                <div class="text-orange-500 leading-none ltr:mr-[10px] rtl:ml-[10px]">
+                                    <i class="material-symbols-outlined !text-5xl">
+                                        settings_timelapse
+                                    </i>
+                                </div>
+                                <div>
+                                    <span class="block">
+                                        Total Earnings
+                                    </span>
+                                    <h5 class="!mb-0 !text-[20px] mt-[2px]">
+                                        $23.91k
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="mt-[15px] sm:mt-[25px] flex items-center justify-between">
+                                <span class="block text-sm">
+                                    Earnings this month
+                                </span>
+                                <span class="inline-block text-sm text-danger-700 py-[1px] px-[8.3px] border border-danger-300 bg-danger-100 dark:bg-dark dark:border-dark rounded-xl">
+                                    -1.25%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-success-50 dark:bg-[#15203c] rounded-md py-[22px] px-[20px]">
+                            <div class="flex items-center">
+                                <div class="text-success-500 leading-none ltr:mr-[10px] rtl:ml-[10px]">
+                                    <i class="material-symbols-outlined !text-5xl">
+                                        assignment_return
+                                    </i>
+                                </div>
+                                <div>
+                                    <span class="block">
+                                        Total Refunds
+                                    </span>
+                                    <h5 class="!mb-0 !text-[20px] mt-[2px]">
+                                        178
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="mt-[15px] sm:mt-[25px] flex items-center justify-between">
+                                <span class="block text-sm">
+                                    Refunds this month
+                                </span>
+                                <span class="inline-block text-sm text-success-700 py-[1px] px-[8.3px] border border-success-300 bg-success-100 dark:bg-dark dark:border-dark rounded-xl">
+                                    +4.75%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="bg-purple-50 dark:bg-[#15203c] rounded-md py-[22px] px-[20px]">
+                            <div class="flex items-center">
+                                <div class="text-purple-500 leading-none ltr:mr-[10px] rtl:ml-[10px]">
+                                    <i class="material-symbols-outlined !text-5xl">
+                                        discover_tune
+                                    </i>
+                                </div>
+                                <div>
+                                    <span class="block">
+                                        Conversion Rate
+                                    </span>
+                                    <h5 class="!mb-0 !text-[20px] mt-[2px]">
+                                        12.21%
+                                    </h5>
+                                </div>
+                            </div>
+                            <div class="mt-[15px] sm:mt-[25px] flex items-center justify-between">
+                                <span class="block text-sm">
+                                    Conversion rate this month
+                                </span>
+                                <span class="inline-block text-sm text-success-700 py-[1px] px-[8.3px] border border-success-300 bg-success-100 dark:bg-dark dark:border-dark rounded-xl">
+                                    +1.11%
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-[25px] mb-[25px]">
+                <div class="lg:col-span-1">
+
+                    <!-- Profile -->
+                    <div class="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
+                        <div class="trezo-card-header mb-[20px] flex items-center justify-between">
+                            <div class="trezo-card-title flex items-center">
+                                <img src="/assets/images/sellers/seller1.png" alt="seller-image">
+                                <div class="ltr:ml-[15px] rtl:mr-[15px]">
+                                    <span class="text-md block mb-[2px] font-medium text-black dark:text-white">
+                                        Ava Turner
+                                    </span>
+                                    <span class="block">
+                                        turner@trezo.com
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="trezo-card-subtitle">
+                                <div class="trezo-card-dropdown relative">
+                                    <button type="button" class="trezo-card-dropdown-btn inline-block transition-all text-[26px] text-gray-500 dark:text-gray-400 leading-none hover:text-primary-500" id="dropdownToggleBtn">
+                                        <i class="ri-more-fill"></i>
+                                    </button>
+                                    <ul class="trezo-card-dropdown-menu transition-all bg-white shadow-3xl rounded-md top-full py-[15px] absolute ltr:right-0 rtl:left-0 w-[195px] z-[5] dark:bg-dark dark:shadow-none">
+                                        <li>
+                                            <button type="button" class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black">
+                                                Block
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black">
+                                                Delete
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black">
+                                                Report
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trezo-card-content">
+                            <ul>
+                                <li class="text-black dark:text-white mb-[10px] last:mb-0">
+                                    <span class="text-gray-500 dark:text-gray-400">
+                                        Last Sale Date:
+                                    </span>
+                                    25 Nov 2025
+                                </li>
+                                <li class="text-black dark:text-white mb-[10px] last:mb-0">
+                                    <span class="text-gray-500 dark:text-gray-400">
+                                        Item Stock:
+                                    </span>
+                                    50
+                                </li>
+                                <li class="text-black dark:text-white mb-[10px] last:mb-0">
+                                    <span class="text-gray-500 dark:text-gray-400">
+                                        Wallet Balance:
+                                    </span>
+                                    $9,999.50
+                                </li>
+                                <li class="text-black dark:text-white mb-[10px] last:mb-0">
+                                    <span class="text-gray-500 dark:text-gray-400">
+                                        Revenue:
+                                    </span>
+                                    $5,999.50
+                                </li>
+                                <li class="text-black dark:text-white mb-[10px] last:mb-0">
+                                    <span class="text-gray-500 dark:text-gray-400">
+                                        Store:
+                                    </span>
+                                    TechMaster Store
+                                </li>
+                            </ul>
+                            <form class="mt-[20px]">
+                                <label class="mb-[10px] text-black dark:text-white font-medium block">
+                                    Contact Support
+                                </label>
+                                <textarea class="h-[140px] rounded-md text-black dark:text-white border border-gray-200 dark:border-[#172036] bg-white dark:bg-[#0c1427] p-[17px] block w-full outline-0 transition-all placeholder:text-gray-500 dark:placeholder:text-gray-400 focus:border-primary-500" placeholder="Type here...."></textarea>
+                                <button type="button" class="mt-[15px] font-medium inline-block transition-all rounded-md md:text-md py-[10px] md:py-[12px] px-[20px] md:px-[22px] bg-primary-500 text-white hover:bg-primary-400">
+                                    <span class="inline-block relative ltr:pl-[29px] rtl:pr-[29px]">
+                                        <i class="material-symbols-outlined ltr:left-0 rtl:right-0 absolute top-1/2 -translate-y-1/2">
+                                            send
+                                        </i>
+                                        Send Message
+                                    </span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="lg:col-span-3">
+
+                    <!-- Revenue -->
+                    <div class="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
+                        <div class="trezo-card-header mb-[20px] md:mb-[25px] flex items-center justify-between">
+                            <div class="trezo-card-title">
+                                <h5 class="!mb-0">
+                                    Revenue: $23.91k
+                                </h5>
+                            </div>
+                            <div class="trezo-card-subtitle">
+                                <div class="trezo-card-dropdown relative">
+                                    <button type="button" class="trezo-card-dropdown-btn inline-block transition-all hover:text-primary-500" id="dropdownToggleBtn">
+                                        <span class="inline-block relative ltr:pr-[17px] ltr:md:pr-[20px] rtl:pl-[17px] rtl:ml:pr-[20px]">
+                                            This Week
+                                            <i class="ri-arrow-down-s-line text-lg absolute ltr:-right-[3px] rtl:-left-[3px] top-1/2 -translate-y-1/2"></i>
+                                        </span>
+                                    </button>
+                                    <ul class="trezo-card-dropdown-menu transition-all bg-white shadow-3xl rounded-md top-full py-[15px] absolute ltr:right-0 rtl:left-0 w-[195px] z-[5] dark:bg-dark dark:shadow-none">
+                                        <li>
+                                            <button type="button" class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black">
+                                                This Day
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black">
+                                                This Week
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black">
+                                                This Month
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" class="block w-full transition-all text-black ltr:text-left rtl:text-right relative py-[8px] px-[20px] hover:bg-gray-50 dark:text-white dark:hover:bg-black">
+                                                This Year
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="trezo-card-content">
+                            <div class="-mt-[8px] ltr:-ml-[13px] rtl:-mr-[13px] -mb-[22px]">
+                                <div id="sellerRevenueChart"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
+                <div class="trezo-tabs products-tabs" id="trezo-tabs">
+                    <ul class="products-list-navs mb-[10px] md:mb-[15px]">
+                        <li class="nav-item inline-block mb-[10px] ltr:mr-[11px] rtl:ml-[11px] ltr:last:mr-0 rtl:last:ml-0">
+                            <button type="button" data-tab="tab1" class="nav-link active block font-semibold transition-all rounded-md text-black dark:text-white py-[10px] md:py-[12px] px-[22px] md:px-[30px] bg-gray-50 dark:bg-[#15203c]">
+                                All Products
+                            </button>
+                        </li>
+                        <li class="nav-item inline-block mb-[10px] ltr:mr-[11px] rtl:ml-[11px] ltr:last:mr-0 rtl:last:ml-0">
+                            <button type="button" data-tab="tab2" class="nav-link block font-semibold transition-all rounded-md text-black dark:text-white py-[10px] md:py-[12px] px-[22px] md:px-[30px] bg-gray-50 dark:bg-[#15203c]">
+                                Published Products
+                            </button>
+                        </li>
+                        <li class="nav-item inline-block mb-[10px] ltr:mr-[11px] rtl:ml-[11px] ltr:last:mr-0 rtl:last:ml-0">
+                            <button type="button" data-tab="tab3" class="nav-link block font-semibold transition-all rounded-md text-black dark:text-white py-[10px] md:py-[12px] px-[22px] md:px-[30px] bg-gray-50 dark:bg-[#15203c]">
+                                Draft Products
+                            </button>
+                        </li>
+                    </ul>
+                    <div class="products-tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex items-center justify-between">
+                                <div class="trezo-card-title">
+                                    <form class="relative sm:w-[265px]">
+                                        <label class="leading-none absolute ltr:left-[13px] rtl:right-[13px] text-black dark:text-white mt-px top-1/2 -translate-y-1/2">
+                                            <i class="material-symbols-outlined !text-[20px]">
+                                                search
+                                            </i>
+                                        </label>
+                                        <input type="text" placeholder="Search product here....." class="bg-gray-50 border border-gray-50 h-[36px] text-xs rounded-md w-full block text-black pt-[11px] pb-[12px] ltr:pl-[38px] rtl:pr-[38px] ltr:pr-[13px] ltr:md:pr-[16px] rtl:pl-[13px] rtl:md:pl-[16px] placeholder:text-gray-500 outline-0 dark:bg-[#15203c] dark:text-white dark:border-[#15203c] dark:placeholder:text-gray-400">
+                                    </form>
+                                </div>
+                                <div class="trezo-card-subtitle mt-[15px] sm:mt-0">
+                                    <a href="/dashboard/create-product" class="inline-block transition-all rounded-md font-medium px-[13px] py-[6px] text-primary-500 border border-primary-500 hover:bg-primary-500 hover:text-white" id="add-new-popup-toggle">
+                                        <span class="inline-block relative ltr:pl-[22px] rtl:pr-[22px]">
+                                            <i class="material-symbols-outlined !text-[22px] absolute ltr:-left-[4px] rtl:-right-[4px] top-1/2 -translate-y-1/2">
+                                                add
+                                            </i>
+                                            Add New Product
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="trezo-card-content">
+                                <div class="table-responsive overflow-x-auto">
+                                    <table class="w-full">
+                                        <thead class="text-black dark:text-white">
+                                            <tr>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    ID
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Product
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Category
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Price
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Order
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Stock
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Amount
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Rating
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Status
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Active
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-black dark:text-white">
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-999
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product1.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Smart Band
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                08 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Watch
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $35.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    75
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    750
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,625
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (141 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-998
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product2.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Headphone
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                07 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Electronics
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $49.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    25
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    825
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $1,225
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (69 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">
+                                                        Draft
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-997
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product3.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                iPhone 15 Plus
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                06 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Apple
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $99.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    55
+                                                </td>
+                                                <td class="text-danger-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Stock Out
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $5,445
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (99 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-996
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product4.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Bluetooth Speaker
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                05 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Google
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $59.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    40
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    535
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,360
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    4.00 (75 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-995
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product5.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Airbuds 2nd Gen
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                04 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Headphone
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $79.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    56
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    460
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $4,424
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (158 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">
+                                                        Draft
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-999
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product1.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Smart Band
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                08 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Watch
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $35.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    75
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    750
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,625
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (141 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-998
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product2.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Headphone
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                07 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Electronics
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $49.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    25
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    825
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $1,225
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (69 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">
+                                                        Draft
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-997
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product3.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                iPhone 15 Plus
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                06 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Apple
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $99.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    55
+                                                </td>
+                                                <td class="text-danger-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Stock Out
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $5,445
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (99 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-996
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product4.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Bluetooth Speaker
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                05 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Google
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $59.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    40
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    535
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,360
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    4.00 (75 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-995
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product5.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Airbuds 2nd Gen
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                04 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Headphone
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $79.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    56
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    460
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $4,424
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (158 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">
+                                                        Draft
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="px-[20px] py-[12px] md:py-[14px] rounded-b-md border-l border-r border-b border-gray-100 dark:border-[#172036] sm:flex sm:items-center justify-between">
+                                    <p class="!mb-0 text-sm">
+                                        Showing 10 of 36 results
+                                    </p>
+                                    <ol class="mt-[10px] sm:mt-0">
+                                        <li class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0">
+                                            <a href="/dashboard/seller-details" class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-gray-100 dark:border-[#172036] transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500">
+                                                <span class="opacity-0">
+                                                    0
+                                                </span>
+                                                <i class="material-symbols-outlined left-0 right-0 absolute top-1/2 -translate-y-1/2">
+                                                    chevron_left
+                                                </i>
+                                            </a>
+                                        </li>
+                                        <li class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0">
+                                            <a href="/dashboard/seller-details" class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-primary-500 bg-primary-500 text-white">
+                                                1
+                                            </a>
+                                        </li>
+                                        <li class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0">
+                                            <a href="/dashboard/seller-details" class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-gray-100 dark:border-[#172036] transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500">
+                                                2
+                                            </a>
+                                        </li>
+                                        <li class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0">
+                                            <a href="/dashboard/seller-details" class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-gray-100 dark:border-[#172036] transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500">
+                                                3
+                                            </a>
+                                        </li>
+                                        <li class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0">
+                                            <a href="/dashboard/seller-details" class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-gray-100 dark:border-[#172036] transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500">
+                                                4
+                                            </a>
+                                        </li>
+                                        <li class="inline-block mx-[1px] ltr:first:ml-0 ltr:last:mr-0 rtl:first:mr-0 rtl:last:ml-0">
+                                            <a href="/dashboard/seller-details" class="w-[31px] h-[31px] block leading-[29px] relative text-center rounded-md border border-gray-100 dark:border-[#172036] transition-all hover:bg-primary-500 hover:text-white hover:border-primary-500">
+                                                <span class="opacity-0">
+                                                    0
+                                                </span>
+                                                <i class="material-symbols-outlined left-0 right-0 absolute top-1/2 -translate-y-1/2">
+                                                    chevron_right
+                                                </i>
+                                            </a>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex items-center justify-between">
+                                <div class="trezo-card-title">
+                                    <form class="relative sm:w-[265px]">
+                                        <label class="leading-none absolute ltr:left-[13px] rtl:right-[13px] text-black dark:text-white mt-px top-1/2 -translate-y-1/2">
+                                            <i class="material-symbols-outlined !text-[20px]">
+                                                search
+                                            </i>
+                                        </label>
+                                        <input type="text" placeholder="Search product here....." class="bg-gray-50 border border-gray-50 h-[36px] text-xs rounded-md w-full block text-black pt-[11px] pb-[12px] ltr:pl-[38px] rtl:pr-[38px] ltr:pr-[13px] ltr:md:pr-[16px] rtl:pl-[13px] rtl:md:pl-[16px] placeholder:text-gray-500 outline-0 dark:bg-[#15203c] dark:text-white dark:border-[#15203c] dark:placeholder:text-gray-400">
+                                    </form>
+                                </div>
+                                <div class="trezo-card-subtitle mt-[15px] sm:mt-0">
+                                    <a href="#" class="inline-block transition-all rounded-md font-medium px-[13px] py-[6px] text-primary-500 border border-primary-500 hover:bg-primary-500 hover:text-white" id="add-new-popup-toggle">
+                                        <span class="inline-block relative ltr:pl-[22px] rtl:pr-[22px]">
+                                            <i class="material-symbols-outlined !text-[22px] absolute ltr:-left-[4px] rtl:-right-[4px] top-1/2 -translate-y-1/2">
+                                                add
+                                            </i>
+                                            Add New Product
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="trezo-card-content">
+                                <div class="table-responsive overflow-x-auto">
+                                    <table class="w-full">
+                                        <thead class="text-black dark:text-white">
+                                            <tr>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    ID
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Product
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Category
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Price
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Order
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Stock
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Amount
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Rating
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Status
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Active
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-black dark:text-white">
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-999
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product1.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Smart Band
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                08 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Watch
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $35.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    75
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    750
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,625
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (141 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-997
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product3.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                iPhone 15 Plus
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                06 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Apple
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $99.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    55
+                                                </td>
+                                                <td class="text-danger-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Stock Out
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $5,445
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (99 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-996
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product4.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Bluetooth Speaker
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                05 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Google
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $59.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    40
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    535
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,360
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    4.00 (75 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-999
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product1.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Smart Band
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                08 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Watch
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $35.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    75
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    750
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,625
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (141 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-997
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product3.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                iPhone 15 Plus
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                06 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Apple
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $99.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    55
+                                                </td>
+                                                <td class="text-danger-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Stock Out
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $5,445
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (99 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-996
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product4.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Bluetooth Speaker
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                05 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Google
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $59.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    40
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    535
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $2,360
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    4.00 (75 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-primary-50 dark:bg-[#15203c] text-primary-500 rounded-sm font-medium text-xs">
+                                                        Published
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                            <div class="trezo-card-header mb-[20px] md:mb-[25px] sm:flex items-center justify-between">
+                                <div class="trezo-card-title">
+                                    <form class="relative sm:w-[265px]">
+                                        <label class="leading-none absolute ltr:left-[13px] rtl:right-[13px] text-black dark:text-white mt-px top-1/2 -translate-y-1/2">
+                                            <i class="material-symbols-outlined !text-[20px]">
+                                                search
+                                            </i>
+                                        </label>
+                                        <input type="text" placeholder="Search product here....." class="bg-gray-50 border border-gray-50 h-[36px] text-xs rounded-md w-full block text-black pt-[11px] pb-[12px] ltr:pl-[38px] rtl:pr-[38px] ltr:pr-[13px] ltr:md:pr-[16px] rtl:pl-[13px] rtl:md:pl-[16px] placeholder:text-gray-500 outline-0 dark:bg-[#15203c] dark:text-white dark:border-[#15203c] dark:placeholder:text-gray-400">
+                                    </form>
+                                </div>
+                                <div class="trezo-card-subtitle mt-[15px] sm:mt-0">
+                                    <a href="#" class="inline-block transition-all rounded-md font-medium px-[13px] py-[6px] text-primary-500 border border-primary-500 hover:bg-primary-500 hover:text-white" id="add-new-popup-toggle">
+                                        <span class="inline-block relative ltr:pl-[22px] rtl:pr-[22px]">
+                                            <i class="material-symbols-outlined !text-[22px] absolute ltr:-left-[4px] rtl:-right-[4px] top-1/2 -translate-y-1/2">
+                                                add
+                                            </i>
+                                            Add New Product
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="trezo-card-content">
+                                <div class="table-responsive overflow-x-auto">
+                                    <table class="w-full">
+                                        <thead class="text-black dark:text-white">
+                                            <tr>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    ID
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Product
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Category
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Price
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Order
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tl-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Stock
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Amount
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Rating
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Status
+                                                </th>
+                                                <th class="font-medium ltr:text-left rtl:text-right px-[20px] py-[11px] bg-gray-50 dark:bg-[#15203c] whitespace-nowrap ltr:first:rounded-tr-md ltr:last:rounded-tr-md rtl:first:rounded-tr-md rtl:last:rounded-tl-md">
+                                                    Active
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-black dark:text-white">
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-998
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product2.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Headphone
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                07 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Electronics
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $49.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    25
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    825
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $1,225
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (69 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">
+                                                        Draft
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-gray-500 dark:text-gray-400 ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    #JAN-995
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center">
+                                                        <div class="rounded-md w-[40px]">
+                                                            <img src="/assets/images/products/product5.jpg" class="inline-block rounded-md" alt="product-image">
+                                                        </div>
+                                                        <div class="ltr:ml-[12px] rtl:mr-[12px]">
+                                                            <a href="/dashboard/product-details" class="font-medium inline-block text-[14px] md:text-[15px] transition-all hover:text-primary-500 mb-px">
+                                                                Airbuds 2nd Gen
+                                                            </a>
+                                                            <span class="block text-sm text-gray-500 dark:text-gray-400">
+                                                                04 Jun 2025
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    Headphone
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $79.00
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    56
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    460
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    $4,424
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    5.00 (158 reviews)
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <span class="px-[8px] py-[3px] inline-block bg-orange-100 dark:bg-[#15203c] text-orange-600 rounded-sm font-medium text-xs">
+                                                        Draft
+                                                    </span>
+                                                </td>
+                                                <td class="ltr:text-left rtl:text-right whitespace-nowrap px-[20px] py-[15px] border-b border-gray-100 dark:border-[#172036] ltr:first:border-l ltr:last:border-r rtl:first:border-r rtl:last:border-l">
+                                                    <div class="flex items-center gap-[9px]">
+                                                        <a href="/dashboard/product-details" class="text-primary-500 leading-none custom-tooltip" id="customTooltip" data-text="View">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                visibility
+                                                            </i>
+                                                        </a>
+                                                        <button type="button" class="text-gray-500 dark:text-gray-400 leading-none custom-tooltip" id="customTooltip" data-text="Edit">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                edit
+                                                            </i>
+                                                        </button>
+                                                        <button type="button" class="text-danger-500 leading-none custom-tooltip" id="customTooltip" data-text="Delete">
+                                                            <i class="material-symbols-outlined !text-md">
+                                                                delete
+                                                            </i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grow"></div>
+            @include('partials.dashboard.footer')
+        </div>
+
+        @include('partials.front.scripts')
+    </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        @include('partials.front.styles')
+
+        <title>Trezo - Tailwind CSS Admin Dashboard Template</title>
+
+        @vite('resources/css/app.css')
+
+    </head>
+    <body>
+        @include('partials.dashboard.sidebar')
+        @include('partials.dashboard.header')
+
+        <div class="main-content transition-all flex flex-col overflow-hidden min-h-screen" id="main-content">
+
+
+            <!-- Breadcrumb -->
+            <div class="mb-[25px] md:flex items-center justify-between">
+                <h5 class="!mb-0">
+                    Internal Error
+                </h5>
+                <ol class="breadcrumb mt-[12px] md:mt-0">
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        <a href="/dashboard" class="inline-block relative ltr:pl-[22px] rtl:pr-[22px] transition-all hover:text-primary-500">
+                            <i class="material-symbols-outlined absolute ltr:left-0 rtl:right-0 !text-lg -mt-px text-primary-500 top-1/2 -translate-y-1/2">
+                                home
+                            </i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        Internal Error
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Internal Error -->
+            <div class="trezo-card bg-white dark:bg-[#0c1427] mb-[25px] p-[20px] md:p-[25px] rounded-md">
+                <div class="trezo-card-content md:pb-[75px] text-center">
+                    <img src="/assets/images/internal-error.png" class="inline-block" alt="internal-error-image">
+                    <h4 class="!text-[19px] md:!text-[21px] mt-[25px] md:mt-[33px] !mb-[11px]">
+                        Looks like we have an internal error, please try again later.
+                    </h4>
+                    <p>
+                        But no worries! Our team is looking ever where while you wait safely.
+                    </p>
+                    <a href="/dashboard" class="inline-block font-medium rounded-md md:text-md mt-[2px] md:mt-[12px] py-[12px] px-[25px] text-white bg-primary-500 transition-all hover:bg-primary-400">
+                        Back to Dashboard
+                    </a>
+                </div>
+            </div>
+
+            <div class="grow"></div>
+            @include('partials.dashboard.footer')
+        </div>
+
+        @include('partials.front.scripts')
+    </body>
+</html>

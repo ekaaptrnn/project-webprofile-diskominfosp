@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        @include('partials.front.styles')
+
+        <title>Trezo - Tailwind CSS Admin Dashboard Template</title>
+
+        @vite('resources/css/app.css')
+
+    </head>
+    <body>
+        @include('partials.dashboard.sidebar')
+        @include('partials.dashboard.header')
+
+        <div class="main-content transition-all flex flex-col overflow-hidden min-h-screen" id="main-content">
+
+
+            <!-- Breadcrumb -->
+            <div class="mb-[25px] md:flex items-center justify-between">
+                <h5 class="!mb-0">
+                    Tooltips
+                </h5>
+                <ol class="breadcrumb mt-[12px] md:mt-0">
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        <a href="/dashboard" class="inline-block relative ltr:pl-[22px] rtl:pr-[22px] transition-all hover:text-primary-500">
+                            <i class="material-symbols-outlined absolute ltr:left-0 rtl:right-0 !text-lg -mt-px text-primary-500 top-1/2 -translate-y-1/2">
+                                home
+                            </i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        UI Elements
+                    </li>
+                    <li class="breadcrumb-item inline-block relative text-sm mx-[11px] ltr:first:ml-0 rtl:first:mr-0 ltr:last:mr-0 rtl:last:ml-0">
+                        Tooltips
+                    </li>
+                </ol>
+            </div>
+
+            <!-- Tooltips -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-[25px] mb-[25px]" id="clickToSeeCode">
+                <div class="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
+                    <div class="trezo-card-header mb-[20px] md:mb-[25px] flex items-center justify-between">
+                        <div class="trezo-card-title">
+                            <h5 class="!mb-0">
+                                Default Tooltip
+                            </h5>
+                        </div>
+                        <button type="button" class="clickToSeeCodeBtn inline-block text-black dark:text-white font-semibold" data-target="basicTooltipDiv">
+                            Click to See Code:
+                        </button>
+                    </div>
+                    <div class="trezo-card-content">
+                        <button type="button" class="inline-block py-[10px] px-[30px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400 custom-tooltip" id="customTooltip" data-text="Hey, Hello World!">
+                            Hover Tooltip
+                        </button>
+                        <div class="relative click-to-show-hide-code" id="basicTooltipDiv">
+                            <button class="absolute text-lg ltr:right-[20px] rtl:left-[20px] top-[20px] transition-all text-primary-500 copy-btn w-[35px] h-[35px] inline-block border border-primary-500 bg-white rounded-sm dark:bg-[#0c1427]" data-clipboard-target="#basicTooltip" type="button">
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+<pre class="line-numbers !mt-[15px] !py-0 !px-[20px] md:!px-[25px] mb-0">
+<code class="language-markup" id="basicTooltip">
+&lt;button type=&quot;button&quot; class=&quot;inline-block py-[10px] px-[30px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400 ltr:mr-[11px] rtl:ml-[11px] mb-[15px] custom-tooltip&quot; id=&quot;customTooltip&quot; data-text=&quot;Hey, Hello World!&quot;&gt;
+    Hover Tooltip
+&lt;/button&gt;
+</code>
+</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="trezo-card bg-white dark:bg-[#0c1427] p-[20px] md:p-[25px] rounded-md">
+                    <div class="trezo-card-header mb-[20px] md:mb-[25px] flex items-center justify-between">
+                        <div class="trezo-card-title">
+                            <h5 class="!mb-0">
+                                Bottom Tooltip
+                            </h5>
+                        </div>
+                        <button type="button" class="clickToSeeCodeBtn inline-block text-black dark:text-white font-semibold" data-target="bottomTooltipDiv">
+                            Click to See Code:
+                        </button>
+                    </div>
+                    <div class="trezo-card-content">
+                        <button type="button" class="inline-block py-[10px] px-[30px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400 custom-tooltip bottom-tooltip" id="customTooltip" data-text="Hey, Hello World!">
+                            Hover Tooltip
+                        </button>
+                        <div class="relative click-to-show-hide-code" id="bottomTooltipDiv">
+                            <button class="absolute text-lg ltr:right-[20px] rtl:left-[20px] top-[20px] transition-all text-primary-500 copy-btn w-[35px] h-[35px] inline-block border border-primary-500 bg-white rounded-sm dark:bg-[#0c1427]" data-clipboard-target="#bottomTooltip" type="button">
+                                <i class="ri-file-copy-line"></i>
+                            </button>
+<pre class="line-numbers !mt-[15px] !py-0 !px-[20px] md:!px-[25px] mb-0">
+<code class="language-markup" id="bottomTooltip">
+&lt;button type=&quot;button&quot; class=&quot;inline-block py-[10px] px-[30px] bg-primary-500 text-white transition-all hover:bg-primary-400 rounded-md border border-primary-500 hover:border-primary-400 custom-tooltip bottom-tooltip&quot; id=&quot;customTooltip&quot; data-text=&quot;Hey, Hello World!&quot;&gt;
+    Hover Tooltip
+&lt;/button&gt;
+</code>
+</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grow"></div>
+            @include('partials.dashboard.footer')
+        </div>
+
+        @include('partials.front.scripts')
+    </body>
+</html>
