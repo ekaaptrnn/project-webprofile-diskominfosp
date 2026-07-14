@@ -764,3 +764,7 @@ Route::prefix('dashboard')->group(function () {
         return view('dashboard.terms-conditions');
     });
 });
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
+});
