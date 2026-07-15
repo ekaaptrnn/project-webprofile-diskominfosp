@@ -1,14 +1,14 @@
-<x-layouts.admin title="Dashboard Admin">
+<x-layouts.admin title="Log Activity">
     <div class="p-[25px]">
         <div class="mb-[25px]">
             <h1 class="text-2xl font-bold text-black dark:text-white">
-                Dashboard Admin
+                Log Activity
             </h1>
             <p class="mt-1 text-gray-500 dark:text-gray-400">
-                Selamat datang di sistem pengelolaan Web Profile Diskominfo SP Kota Surakarta.
+                Riwayat aktivitas login dan aksi admin di sistem.
             </p>
         </div>
 
-        <livewire:admin.dashboard />
+        <livewire:admin.log-activity />
     </div>
 </x-layouts.admin>
