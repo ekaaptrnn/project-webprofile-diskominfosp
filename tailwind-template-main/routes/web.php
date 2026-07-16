@@ -16,4 +16,5 @@ Route::prefix('admin')
     ->group(function () {
         Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
         Route::view('/log-activity', 'admin.log-activity')->name('log-activity');
+        Route::view('/theme-settings', 'admin.theme-settings')->name('theme-settings');
     });

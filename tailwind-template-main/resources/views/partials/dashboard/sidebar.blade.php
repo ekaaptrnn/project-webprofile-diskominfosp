@@ -15,5 +15,9 @@
             <span>&#128203;</span>
             <span>Log Activity</span>
         </a>
+        <a href="{{ route('admin.theme-settings') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium {{ request()->routeIs('admin.theme-settings') ? '...' : '...' }}">
+            <span>&#127912;</span>
+            <span>Theme Settings</span>
+        </a>
     </nav>
 </aside>
