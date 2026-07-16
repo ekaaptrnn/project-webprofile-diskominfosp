@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\LayananController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\ThemeSettingController;
 use App\Http\Controllers\Api\LogActivityController;
+use App\Http\Controllers\Api\UserController;
 
 // ============ ROUTE PUBLIK (tanpa login) ============
 Route::post('/login', [AuthController::class, 'login']);
@@ -33,7 +34,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/layanan/{id}', [LayananController::class, 'destroy']);
 
     Route::post('/kategori', [KategoriController::class, 'store']);
+    Route::put('/kategori/{id}', [KategoriController::class, 'update']);
+    Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 
     Route::put('/theme', [ThemeSettingController::class, 'update']); // <- YANG PUT DI DALAM GRUP
     Route::get('/logs', [LogActivityController::class, 'index']);
+
+Route::middleware(['auth:sanctum', 'role:Super Admin'])->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::post('/users', [UserController::class, 'store']);
+    Route::put('/users/{id}', [UserController::class, 'update']);
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+    });
 });
