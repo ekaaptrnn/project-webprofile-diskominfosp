@@ -16,6 +16,17 @@ class LogActivity extends Model
         'created_at' => 'datetime',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            if (empty($model->created_at)) {
+                $model->created_at = now();
+            }
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

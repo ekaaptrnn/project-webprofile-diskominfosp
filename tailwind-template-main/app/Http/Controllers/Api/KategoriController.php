@@ -13,6 +13,7 @@ class KategoriController extends Controller
         return response()->json(Kategori::where('is_publish', true)->get());
     }
 
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -22,4 +23,17 @@ class KategoriController extends Controller
 
         return response()->json(Kategori::create($validated), 201);
     }
+
+    public function update(Request $request, $id)
+    {
+    $kategori = Kategori::findOrFail($id);
+    $kategori->update($request->all());
+    return response()->json($kategori);
+    }
+
+    public function destroy($id)
+    {
+    Kategori::findOrFail($id)->delete();
+    return response()->json(['message' => 'Kategori berhasil dihapus']);
+}
 }
