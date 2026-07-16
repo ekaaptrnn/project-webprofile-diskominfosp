@@ -30,21 +30,42 @@ class BeritaController extends Controller
             'konten' => 'required|string',
             'kategori_id' => 'nullable|exists:kategoris,id',
             'status_publish' => 'boolean',
+        ],[
+            'judul.required' => 'Judul berita wajib diisi',
+        'judul.max' => 'Judul berita maksimal 255 karakter',
+        'konten.required' => 'Konten berita wajib diisi',
+        'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
         ]);
 
-        $validated['author_id'] = $request->user()->id;
-        $berita = Berita::create($validated);
-
-        return response()->json($berita, 201);
+        return response()->json([
+        'message' => 'Berita berhasil dibuat',
+        'data' => $berita,
+        ], 201);
     }
 
     // PUT /api/berita/{id} — butuh login
     public function update(Request $request, $id)
-    {
-        $berita = Berita::findOrFail($id);
-        $berita->update($request->all());
-        return response()->json($berita);
-    }
+{
+    $berita = Berita::findOrFail($id);
+
+    $validated = $request->validate([
+        'judul' => 'sometimes|required|string|max:255',
+        'konten' => 'sometimes|required|string',
+        'kategori_id' => 'nullable|exists:kategoris,id',
+        'status_publish' => 'boolean',
+    ], [
+        'judul.required' => 'Judul berita wajib diisi',
+        'konten.required' => 'Konten berita wajib diisi',
+        'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
+    ]);
+
+    $berita->update($validated);
+
+    return response()->json([
+        'message' => 'Berita berhasil diperbarui',
+        'data' => $berita,
+    ]);
+}
 
     // DELETE /api/berita/{id} — butuh login
     public function destroy($id)
