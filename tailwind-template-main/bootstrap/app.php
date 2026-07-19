@@ -14,17 +14,36 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
+
         $middleware->api(append: [
             \App\Http\Middleware\LogActivity::class,
         ]);
         $middleware->alias([
-        'role' => \App\Http\Middleware\CheckRole::class,
+            'role' => \App\Http\Middleware\CheckRole::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
+        // Handle: token tidak ada/salah (401)
         $exceptions->render(function (\Illuminate\Auth\AuthenticationException $e, $request) {
             if ($request->is('api/*')) {
-                return response()->json(['message' => 'Unauthenticated.'], 401);
+                return response()->json(['message' => 'Silakan login terlebih dahulu.'], 401);
+            }
+        });
+
+        // Handle: data tidak ditemukan (404)
+        $exceptions->render(function (\Illuminate\Database\Eloquent\ModelNotFoundException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json(['message' => 'Data yang dicari tidak ditemukan.'], 404);
+            }
+        });
+
+        // Handle: validasi gagal (422) - format lebih rapi
+        $exceptions->render(function (\Illuminate\Validation\ValidationException $e, $request) {
+            if ($request->is('api/*')) {
+                return response()->json([
+                    'message' => 'Validasi gagal, cek kembali data yang dikirim.',
+                    'errors' => $e->errors(),
+                ], 422);
             }
         });
     })->create();

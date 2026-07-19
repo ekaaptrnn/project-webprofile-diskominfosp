@@ -19,7 +19,19 @@ class LayananController extends Controller
             'nama_layanan' => 'required|string',
             'icon_path' => 'nullable|string',
             'url_eksternal' => 'required|string',
+        ],[
+            'nama_layanan.required' => 'Nama layanan wajib diisi',
+            'url_eksternal.required' => 'URL layanan wajib diisi',
+            'url_eksternal.url' => 'URL layanan harus berupa link yang valid',
         ]);
+
+        $layanan = Layanan::create($validated);
+
+    return response()->json([
+        'message' => 'Layanan berhasil dibuat',
+        'data' => $layanan,
+    ], 201);
+
 
         return response()->json(Layanan::create($validated), 201);
     }
