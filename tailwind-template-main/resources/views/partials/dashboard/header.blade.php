@@ -6,14 +6,22 @@
             </h2>
         </div>
 
-        <div class="flex items-center gap-3">
-            <span class="text-sm text-gray-600">
-                Administrator
-            </span>
+        <div class="flex items-center gap-4">
+            <div class="text-right">
+                <p class="text-sm font-medium text-gray-900">{{ auth()->user()->name }}</p>
+                <p class="text-xs text-gray-500">{{ auth()->user()->role->name ?? 'Admin' }}</p>
+            </div>
 
             <div class="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white">
-                A
+                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
             </div>
+
+            <form method="POST" action="{{ route('admin.logout') }}">
+                @csrf
+                <button type="submit" class="text-sm text-gray-500 hover:text-red-600">
+                    Logout
+                </button>
+            </form>
         </div>
     </div>
 </header>
