@@ -25,6 +25,10 @@ Route::prefix('admin')
         Route::view('/log-activity', 'admin.log-activity')->name('log-activity');
         Route::view('/theme-settings', 'admin.theme-settings')->name('theme-settings');
 
+        Route::view('/users', 'admin.users')
+            ->name('users')
+            ->middleware('role:Super Admin');
+
         Route::post('/logout', function () {
             Auth::logout();
             request()->session()->invalidate();

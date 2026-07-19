@@ -23,6 +23,9 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'avatar',
+        'instansi',
+        'status',
     ];
 
     /**
@@ -52,4 +55,6 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    
 }
