@@ -2,7 +2,7 @@
     <div class="flex items-center justify-between">
         <div>
             <h2 class="text-lg font-semibold text-gray-900">
-                Admin Diskominfo SP
+                Panel {{ auth()->user()->role->name ?? 'Admin' }} — Diskominfo SP
             </h2>
         </div>
 

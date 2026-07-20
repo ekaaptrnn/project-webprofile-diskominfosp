@@ -21,6 +21,11 @@
             <span>Theme Settings</span>
         </a>
 
+        <a href="{{ route('admin.berita') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium {{ request()->routeIs('admin.berita') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
+            <span>&#128240;</span>
+            <span>Kelola Berita</span>
+        </a>        
+
         @if (auth()->user()->role->name === 'Super Admin')
             <a href="{{ route('admin.users') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium {{ request()->routeIs('admin.users') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
                 <span>&#128100;</span>

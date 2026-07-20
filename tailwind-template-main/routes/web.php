@@ -24,6 +24,7 @@ Route::prefix('admin')
         Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
         Route::view('/log-activity', 'admin.log-activity')->name('log-activity');
         Route::view('/theme-settings', 'admin.theme-settings')->name('theme-settings');
+        Route::view('/berita', 'admin.berita')->name('berita');
 
         Route::view('/users', 'admin.users')
             ->name('users')
