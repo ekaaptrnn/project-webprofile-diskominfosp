@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Panggil UserSeeder kamu di sini 👈
+        
         $this->call([
             UserSeeder::class,
-            // Jika ada seeder lain nanti, tinggal tambahkan di bawahnya
+
         ]);
     }
 }
