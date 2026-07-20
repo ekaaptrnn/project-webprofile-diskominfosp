@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'Login Admin' }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles <!-- 👈 Tambahkan di sini -->
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
     {{ $slot }}
+
+    @livewireScripts <!-- 👈 Tambahkan di sini -->
 </body>
 </html>
