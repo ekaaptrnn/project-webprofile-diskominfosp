@@ -2,21 +2,14 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+// Import Komponen Livewire
+use App\Livewire\Admin\Articles;
+use App\Livewire\Admin\Awards;
 
 Route::view('/', 'welcome')->name('home');
 
-/*
-|--------------------------------------------------------------------------
-| Admin Login (tanpa proteksi — ini justru pintu masuknya)
-|--------------------------------------------------------------------------
-*/
 Route::view('/admin/login', 'admin.login')->name('admin.login');
 
-/*
-|--------------------------------------------------------------------------
-| Admin Dashboard (WAJIB login)
-|--------------------------------------------------------------------------
-*/
 Route::prefix('admin')
     ->name('admin.')
     ->middleware('auth')
@@ -25,6 +18,10 @@ Route::prefix('admin')
         Route::view('/log-activity', 'admin.log-activity')->name('log-activity');
         Route::view('/theme-settings', 'admin.theme-settings')->name('theme-settings');
         Route::view('/berita', 'admin.berita')->name('berita');
+
+        // 👇 Tambahkan 2 Route Livewire ini 👇
+        Route::get('/articles', Articles::class)->name('articles');
+        Route::get('/awards', Awards::class)->name('awards');
 
         Route::view('/users', 'admin.users')
             ->name('users')

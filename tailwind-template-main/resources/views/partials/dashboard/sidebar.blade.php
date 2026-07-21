@@ -38,7 +38,21 @@
             <span>Kelola Berita</span>
         </a>
 
-        @if (auth()->user()->role->name === 'Super Admin')
+        <!-- Menu Kelola Artikel -->
+        <a href="{{ route('admin.articles') }}"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg transition {{ request()->routeIs('admin.articles') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800' }}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+            <span>Kelola Artikel</span>
+        </a>
+
+        <!-- Menu Kelola Penghargaan -->
+        <a href="{{ route('admin.awards') }}"
+            class="flex items-center gap-3 px-4 py-3 rounded-lg transition {{ request()->routeIs('admin.awards') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800' }}">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+            <span>Kelola Penghargaan</span>
+        </a>
+
+        @if (optional(auth()->user()->role)->name === 'Super Admin')
             <a href="{{ route('admin.users') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium {{ request()->routeIs('admin.users') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
                 <span>&#128100;</span>
                 <span>Kelola Akun</span>

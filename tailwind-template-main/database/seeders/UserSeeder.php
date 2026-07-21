@@ -3,17 +3,21 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Role;   
-use App\Models\User;   
+use App\Models\Role;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        $superAdminRole = Role::where('name', 'Super Admin')->first();
+        // 1. Buat Role 'Super Admin' dulu jika belum ada di database
+        $superAdminRole = Role::firstOrCreate(
+            ['name' => 'Super Admin'],
+            ['description' => 'Akses penuh ke seluruh sistem'] // sesuaikan jika ada field lain
+        );
 
+        // 2. Buat User Admin Test
         User::firstOrCreate(
             ['email' => 'admin@test.com'],
             [
@@ -23,6 +27,7 @@ class UserSeeder extends Seeder
             ]
         );
 
+        // 3. Buat User Yardan
         User::firstOrCreate(
             ['email' => 'y@test.com'],
             [
