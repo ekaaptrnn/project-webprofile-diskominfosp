@@ -22,5 +22,14 @@ class UserSeeder extends Seeder
                 'role_id' => $superAdminRole->id,
             ]
         );
+
+        User::firstOrCreate(
+            ['email' => 'y@test.com'],
+            [
+                'name' => 'yardan',
+                'password' => Hash::make('password123'),
+                'role_id' => $superAdminRole->id,
+            ]
+        );
     }
 }
