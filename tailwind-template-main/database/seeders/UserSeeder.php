@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             ['email' => 'y@test.com'],
             [
                 'name' => 'yardan',
-                'password' => Hash::make('password123'),
+                'password' => Hash::make('12345678'),
                 'role_id' => $superAdminRole->id,
             ]
         );
