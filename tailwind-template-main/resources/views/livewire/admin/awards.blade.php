@@ -116,9 +116,9 @@
                     </div>
 
                     <!-- Deskripsi Penghargaan -->
-                    <div class="mb-6">
+                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Deskripsi Penghargaan</label>
-                        <textarea wire:model="description" rows="4" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Jelaskan detail penghargaan..."></textarea>
+                        <textarea wire:model="description" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" placeholder="Masukkan deskripsi penghargaan..."></textarea>
                         @error('description') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 

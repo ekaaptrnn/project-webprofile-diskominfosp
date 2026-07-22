@@ -17,6 +17,8 @@ class Awards extends Component
     public $editingId = null;
 
     public $title;
+
+    public $category;
     public $description;
     public $image;
     public $year;
@@ -48,55 +50,71 @@ class Awards extends Component
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->reset(['editingId', 'title', 'description', 'image', 'year', 'existingImage']);
+        $this->reset(['editingId', 'title','category', 'description', 'image', 'year', 'existingImage']);
     }
 
     public function save()
     {
-        $rules = [
-            'title'       => 'required|min:3',
-            'description' => 'required|min:5',
-            'year'        => 'required|digits:4|integer|min:2000|max:' . (date('Y') + 1),
-        ];
+    $this->validate([
+        'title'       => 'required',
+        'year'        => 'required',
+        'description' => 'required',
+        'image'       => 'nullable|image|max:2048',
+    ]);
 
-        // Gambar wajib diisi saat tambah baru, opsional saat edit
-        $rules['image'] = $this->editingId ? 'nullable|image|max:2048' : 'required|image|max:2048';
 
-        $this->validate($rules);
 
-        $data = [
-            'title'       => $this->title,
-            'description' => $this->description,
-            'year'        => $this->year,
-        ];
+    $data = [];
 
-        if ($this->image) {
-            // Simpan gambar baru ke folder storage/app/public/awards
-            $data['image'] = $this->image->store('awards', 'public');
-
-            // Hapus gambar lama kalau sedang edit dan ada gambar baru
-            if ($this->editingId && $this->existingImage) {
-                Storage::disk('public')->delete($this->existingImage);
-            }
-        }
-
-        $isUpdate = (bool) $this->editingId;
-
-        if ($this->editingId) {
-            Award::findOrFail($this->editingId)->update($data);
-        } else {
-            Award::create($data);
-        }
-
-        $this->logActivity(
-            $isUpdate ? 'UPDATE' : 'CREATE',
-            'Penghargaan: ' . $this->title
-        );
-
-        $this->closeModal();
-        session()->flash('message', $isUpdate ? 'Penghargaan berhasil diperbarui!' : 'Penghargaan berhasil ditambahkan!');
+    // Mengisi Judul
+    if (\Schema::hasColumn('awards', 'title')) {
+        $data['title'] = $this->title;
+    } elseif (\Schema::hasColumn('awards', 'judul')) {
+        $data['judul'] = $this->title;
     }
 
+    // Mengisi Tahun
+    if (\Schema::hasColumn('awards', 'year')) {
+        $data['year'] = $this->year;
+    } elseif (\Schema::hasColumn('awards', 'tahun')) {
+        $data['tahun'] = $this->year;
+    }
+
+    // Mengisi Deskripsi
+    if (\Schema::hasColumn('awards', 'description')) {
+        $data['description'] = $this->description;
+    } elseif (\Schema::hasColumn('awards', 'deskripsi')) {
+        $data['deskripsi'] = $this->description;
+    }
+
+    // Mengisi Gambar jika ada
+    if ($this->image) {
+        $path = $this->image->store('awards', 'public');
+        if (\Schema::hasColumn('awards', 'image')) {
+            $data['image'] = $path;
+        } elseif (\Schema::hasColumn('awards', 'gambar')) {
+            $data['gambar'] = $path;
+        } elseif (\Schema::hasColumn('awards', 'thumbnail')) {
+            $data['thumbnail'] = $path;
+        }
+    }
+
+    // Simpan ke Database
+    if ($this->editingId) {
+        Award::findOrFail($this->editingId)->update($data);
+    } else {
+        Award::create($data);
+    }
+
+    $this->reset(['editingId', 'title', 'category', 'description', 'image', 'year', 'existingImage']);
+    if (method_exists($this, 'closeModal')) {
+        $this->closeModal();
+    } else {
+        $this->isModalOpen = false;
+    }
+
+    session()->flash('message', 'Penghargaan berhasil disimpan!');
+    }
     public function delete(int $id)
     {
         $award = Award::findOrFail($id);
