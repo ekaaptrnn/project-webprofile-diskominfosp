@@ -3,7 +3,9 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
-use App\Models\Article; // 👈 Import Model Article
+use App\Models\Article; // Import Model Article
+use App\Models\LogActivity;
+use Illuminate\Support\Facades\Log;
 
 class Articles extends Component
 {
@@ -48,8 +50,32 @@ class Articles extends Component
             'content'      => $this->content,
         ]);
 
+        $this->logActivity('CREATE', 'Artikel: ' . $this->title);
+
         $this->closeModal();
         session()->flash('message', 'Artikel berhasil ditambahkan!');
+    }
+
+    private function logActivity(string $method, string $description): void
+    {
+        // 1. Simpan ke database
+        LogActivity::create([
+            'user_id'     => auth()->id(),
+            'subject'     => 'Artikel',
+            'method'      => $method,
+            'ip_address'  => request()->ip(),
+            'description' => $description,
+            'status'      => 'success',
+        ]);
+
+        // 2. Simpan juga ke file storage/logs/audit.log
+        Log::channel('audit')->info(sprintf(
+            'user_id=%s subject=Artikel method=%s ip=%s status=success description=%s',
+            auth()->id(),
+            $method,
+            request()->ip(),
+            $description
+        ));
     }
 
     public function render()

@@ -31,4 +31,24 @@ class LogActivity extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    private function logActivity(string $method, string $description): void
+{
+    LogActivity::create([
+        'user_id'     => auth()->id(),
+        'subject'     => 'Berita',
+        'method'      => $method,
+        'ip_address'  => request()->ip(),
+        'description' => $description,
+        'status'      => 'success',
+    ]);
+
+    Log::channel('audit')->info(sprintf(
+        'user_id=%s subject=Berita method=%s ip=%s status=success description=%s',
+        auth()->id(),
+        $method,
+        request()->ip(),
+        $description
+    ));
+}
 }

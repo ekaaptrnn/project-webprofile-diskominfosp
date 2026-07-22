@@ -18,5 +18,16 @@ class ActivityLogger
             'status'      => $status,
             'created_at'  => now(),
         ]);
+
+        Log::channel('audit')->info(sprintf(
+            '[%s] user_id=%s subject=%s method=%s ip=%s status=%s description=%s',
+            now()->toDateTimeString(),
+            $userId ?? 'guest',
+            $subject,
+            $method,
+            $ip,
+            $status,
+            $description
+        ));
     }
 }

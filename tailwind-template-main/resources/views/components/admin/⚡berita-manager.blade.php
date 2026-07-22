@@ -2,6 +2,8 @@
 
 use App\Models\Berita;
 use App\Models\Kategori;
+use App\Models\LogActivity;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -78,11 +80,18 @@ new class extends Component
             $data['thumbnail'] = $this->thumbnail->store('berita-thumbnails', 'public');
         }
 
+        $isUpdate = (bool) $this->editingId;
+
         if ($this->editingId) {
             Berita::findOrFail($this->editingId)->update($data);
         } else {
             Berita::create($data);
         }
+
+        $this->logActivity(
+            $isUpdate ? 'UPDATE' : 'CREATE',
+            'Berita: ' . $this->judul
+        );
 
         $this->closeModal();
     }
@@ -91,15 +100,21 @@ new class extends Component
     {
         $berita = Berita::findOrFail($id);
         $berita->update(['status_publish' => ! $berita->status_publish]);
+
+        $this->logActivity('UPDATE', 'Toggle publish Berita: ' . $berita->judul);
     }
 
     public function delete(int $id): void
     {
         $berita = Berita::findOrFail($id);
+        $judul = $berita->judul;
+
         if ($berita->thumbnail) {
             Storage::disk('public')->delete($berita->thumbnail);
         }
         $berita->delete();
+
+        $this->logActivity('DELETE', 'Berita: ' . $judul);
     }
 
     public function closeModal(): void
@@ -118,6 +133,28 @@ new class extends Component
         $this->thumbnail = null;
         $this->existingThumbnail = null;
         $this->resetErrorBag();
+    }
+
+    private function logActivity(string $method, string $description): void
+    {
+        // 1. Simpan ke database
+        LogActivity::create([
+            'user_id'     => auth()->id(),
+            'subject'     => 'Berita',
+            'method'      => $method,
+            'ip_address'  => request()->ip(),
+            'description' => $description,
+            'status'      => 'success',
+        ]);
+
+        // 2. Simpan juga ke file storage/logs/audit.log
+        Log::channel('audit')->info(sprintf(
+            'user_id=%s subject=Berita method=%s ip=%s status=success description=%s',
+            auth()->id(),
+            $method,
+            request()->ip(),
+            $description
+        ));
     }
 }; ?>
 
@@ -213,7 +250,12 @@ new class extends Component
                         @if ($existingThumbnail && ! $thumbnail)
                             <img src="{{ Storage::url($existingThumbnail) }}" class="mb-2 h-24 w-auto rounded-md object-cover">
                         @endif
-                        <input type="file" wire:model="thumbnail" accept="image/*" class="w-full text-sm text-black dark:text-white">
+                        <input type="file" wire:model="thumbnail" accept="image/*"
+                            class="w-full text-sm text-gray-600 dark:text-gray-300
+                                   file:mr-4 file:py-2 file:px-4
+                                   file:rounded-md file:border file:border-gray-300 dark:file:border-[#172036]
+                                   file:bg-gray-50 dark:file:bg-[#15203c] file:text-sm file:font-medium file:text-gray-700 dark:file:text-white
+                                   hover:file:bg-gray-100 file:cursor-pointer">
                         <div wire:loading wire:target="thumbnail" class="mt-1 text-xs text-gray-500">Mengunggah...</div>
                         @error('thumbnail') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
                     </div>
