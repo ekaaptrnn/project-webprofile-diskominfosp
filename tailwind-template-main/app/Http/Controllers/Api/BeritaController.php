@@ -28,19 +28,19 @@ class BeritaController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
+            'thumbnail' => 'nullable|string',
             'kategori_id' => 'nullable|exists:kategoris,id',
             'status_publish' => 'boolean',
-        ],[
-            'judul.required' => 'Judul berita wajib diisi',
-        'judul.max' => 'Judul berita maksimal 255 karakter',
-        'konten.required' => 'Konten berita wajib diisi',
-        'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
         ]);
 
+        $validated['author_id'] = auth()->id();
+
+        $berita = Berita::create($validated);
+
         return response()->json([
-        'message' => 'Berita berhasil dibuat',
-        'data' => $berita,
-        ], 201);
+            'message' => 'Berita berhasil dibuat',
+            'data' => $berita,
+        ],201);
     }
 
     // PUT /api/berita/{id} — butuh login
