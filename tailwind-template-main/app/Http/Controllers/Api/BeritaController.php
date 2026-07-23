@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
@@ -28,49 +29,72 @@ class BeritaController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
-            'thumbnail' => 'nullable|string',
             'kategori_id' => 'nullable|exists:kategoris,id',
             'status_publish' => 'boolean',
+            'thumbnail' => 'nullable|image|max:2048',
+        ], [
+            'judul.required' => 'Judul berita wajib diisi',
+            'judul.max' => 'Judul berita maksimal 255 karakter',
+            'konten.required' => 'Konten berita wajib diisi',
+            'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
         ]);
 
-        $validated['author_id'] = auth()->id();
+        $validated['author_id'] = $request->user()->id;
+
+        if ($request->hasFile('thumbnail')) {
+            $validated['thumbnail'] = $request->file('thumbnail')->store('berita', 'public');
+        }
 
         $berita = Berita::create($validated);
 
         return response()->json([
             'message' => 'Berita berhasil dibuat',
             'data' => $berita,
-        ],201);
+        ], 201);
     }
 
     // PUT /api/berita/{id} — butuh login
     public function update(Request $request, $id)
-{
-    $berita = Berita::findOrFail($id);
+    {
+        $berita = Berita::findOrFail($id);
 
-    $validated = $request->validate([
-        'judul' => 'sometimes|required|string|max:255',
-        'konten' => 'sometimes|required|string',
-        'kategori_id' => 'nullable|exists:kategoris,id',
-        'status_publish' => 'boolean',
-    ], [
-        'judul.required' => 'Judul berita wajib diisi',
-        'konten.required' => 'Konten berita wajib diisi',
-        'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
-    ]);
+        $validated = $request->validate([
+            'judul' => 'sometimes|required|string|max:255',
+            'konten' => 'sometimes|required|string',
+            'kategori_id' => 'nullable|exists:kategoris,id',
+            'status_publish' => 'boolean',
+            'thumbnail' => 'nullable|image|max:2048',
+        ], [
+            'judul.required' => 'Judul berita wajib diisi',
+            'konten.required' => 'Konten berita wajib diisi',
+            'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
+        ]);
 
-    $berita->update($validated);
+        if ($request->hasFile('thumbnail')) {
+            if ($berita->thumbnail) {
+                Storage::disk('public')->delete($berita->thumbnail);
+            }
+            $validated['thumbnail'] = $request->file('thumbnail')->store('berita', 'public');
+        }
 
-    return response()->json([
-        'message' => 'Berita berhasil diperbarui',
-        'data' => $berita,
-    ]);
-}
+        $berita->update($validated);
+
+        return response()->json([
+            'message' => 'Berita berhasil diperbarui',
+            'data' => $berita,
+        ]);
+    }
 
     // DELETE /api/berita/{id} — butuh login
     public function destroy($id)
     {
-        Berita::findOrFail($id)->delete();
+        $berita = Berita::findOrFail($id);
+
+        if ($berita->thumbnail) {
+            Storage::disk('public')->delete($berita->thumbnail);
+        }
+
+        $berita->delete();
         return response()->json(['message' => 'Berita berhasil dihapus']);
     }
 }
