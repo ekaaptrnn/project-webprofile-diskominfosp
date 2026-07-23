@@ -26,8 +26,8 @@
                     <tr class="bg-gray-50 dark:bg-gray-700/50 border-b border-gray-100 dark:border-gray-700 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         <th class="px-6 py-4">Thumbnail</th>
                         <th class="px-6 py-4">Judul</th>
-                        <th class="px-6 py-4">Kategori</th>
                         <th class="px-6 py-4">Penulis</th>
+                        <th class="px-6 py-4 text-center">Dilihat</th>
                         <th class="px-6 py-4">Status</th>
                         <th class="px-6 py-4 text-center">Aksi</th>
                     </tr>
@@ -48,10 +48,10 @@
                                 {{ $item->judul }}
                             </td>
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
-                                {{ $item->kategori?->nama_kategori ?? '-' }}
-                            </td>
-                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
                                 {{ $item->author?->name ?? '-' }}
+                            </td>
+                            <td class="px-6 py-4 text-center text-gray-500 dark:text-gray-400 font-semibold">
+                                {{ number_format($item->views) }}
                             </td>
                             <td class="px-6 py-4">
                                 <button wire:click="togglePublish({{ $item->id }})"
@@ -96,18 +96,6 @@
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Judul Berita</label>
                         <input type="text" wire:model="judul" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan judul berita...">
                         @error('judul') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
-                    </div>
-
-                    <!-- Kategori -->
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Kategori</label>
-                        <select wire:model="kategori_id" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">-- Tanpa Kategori --</option>
-                            @foreach ($kategoris as $kat)
-                                <option value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
-                            @endforeach
-                        </select>
-                        @error('kategori_id') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Thumbnail -->

@@ -12,14 +12,18 @@ class BeritaController extends Controller
     // GET /api/berita — publik
     public function index()
     {
-        $berita = Berita::where('status_publish', true)->with('kategori', 'author')->latest()->get();
+        $berita = Berita::where('status_publish', true)->with('author')->latest()->get();
         return response()->json($berita);
     }
 
     // GET /api/berita/{id} — publik
     public function show($id)
     {
-        $berita = Berita::where('status_publish', true)->with('kategori', 'author')->findOrFail($id);
+        $berita = Berita::where('status_publish', true)->with('author')->findOrFail($id);
+
+        // Tambah jumlah dilihat setiap kali diakses publik
+        $berita->increment('views');
+
         return response()->json($berita);
     }
 
@@ -29,14 +33,12 @@ class BeritaController extends Controller
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
             'konten' => 'required|string',
-            'kategori_id' => 'nullable|exists:kategoris,id',
             'status_publish' => 'boolean',
             'thumbnail' => 'nullable|image|max:2048',
         ], [
             'judul.required' => 'Judul berita wajib diisi',
             'judul.max' => 'Judul berita maksimal 255 karakter',
             'konten.required' => 'Konten berita wajib diisi',
-            'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
         ]);
 
         $validated['author_id'] = $request->user()->id;
@@ -61,13 +63,11 @@ class BeritaController extends Controller
         $validated = $request->validate([
             'judul' => 'sometimes|required|string|max:255',
             'konten' => 'sometimes|required|string',
-            'kategori_id' => 'nullable|exists:kategoris,id',
             'status_publish' => 'boolean',
             'thumbnail' => 'nullable|image|max:2048',
         ], [
             'judul.required' => 'Judul berita wajib diisi',
             'konten.required' => 'Konten berita wajib diisi',
-            'kategori_id.exists' => 'Kategori yang dipilih tidak ditemukan',
         ]);
 
         if ($request->hasFile('thumbnail')) {

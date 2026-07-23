@@ -6,7 +6,6 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use App\Models\Berita;
-use App\Models\Kategori;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -22,7 +21,6 @@ class BeritaManager extends Component
     // Field Form
     public $judul;
     public $konten;
-    public $kategori_id;
     public $status_publish = false;
     public $thumbnail;
     public $existingThumbnail = null;
@@ -31,7 +29,7 @@ class BeritaManager extends Component
 
     public function openModal()
     {
-        $this->reset(['editingId', 'judul', 'konten', 'kategori_id', 'thumbnail', 'existingThumbnail']);
+        $this->reset(['editingId', 'judul', 'konten', 'thumbnail', 'existingThumbnail']);
         $this->status_publish = false;
         $this->resetErrorBag();
         $this->isModalOpen = true;
@@ -44,7 +42,6 @@ class BeritaManager extends Component
         $this->editingId = $berita->id;
         $this->judul = $berita->judul;
         $this->konten = $berita->konten;
-        $this->kategori_id = $berita->kategori_id;
         $this->status_publish = (bool) $berita->status_publish;
         $this->existingThumbnail = $berita->thumbnail;
         $this->thumbnail = null;
@@ -56,7 +53,7 @@ class BeritaManager extends Component
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->reset(['editingId', 'judul', 'konten', 'kategori_id', 'thumbnail', 'existingThumbnail']);
+        $this->reset(['editingId', 'judul', 'konten', 'thumbnail', 'existingThumbnail']);
         $this->status_publish = false;
     }
 
@@ -65,7 +62,6 @@ class BeritaManager extends Component
         $this->validate([
             'judul'          => 'required|min:3|max:255',
             'konten'         => 'required|min:10',
-            'kategori_id'    => 'nullable|exists:kategoris,id',
             'thumbnail'      => 'nullable|image|max:2048',
             'status_publish' => 'boolean',
         ], [
@@ -76,7 +72,6 @@ class BeritaManager extends Component
         $data = [
             'judul'          => $this->judul,
             'konten'         => $this->konten,
-            'kategori_id'    => $this->kategori_id ?: null,
             'status_publish' => $this->status_publish,
         ];
 
@@ -153,8 +148,7 @@ class BeritaManager extends Component
     public function render()
     {
         return view('livewire.admin.berita-manager', [
-            'beritas'   => Berita::with('kategori', 'author')->latest()->paginate(10),
-            'kategoris' => Kategori::orderBy('nama_kategori')->get(),
+            'beritas' => Berita::with('author')->latest()->paginate(10),
         ]);
     }
 }
