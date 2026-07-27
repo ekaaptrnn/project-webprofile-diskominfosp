@@ -20,6 +20,7 @@ Route::prefix('admin')
         Route::view('/berita', 'admin.berita')->name('berita');
         Route::view('/pejabat', 'admin.pejabat')->name('pejabat');
         Route::view('/layanan', 'admin.layanan')->name('layanan');
+        Route::view('/dokumen', 'admin.dokumen')->name('dokumen');
 
         // 👇 Tambahkan 2 Route Livewire ini 👇
         Route::get('/articles', Articles::class)->name('articles');
