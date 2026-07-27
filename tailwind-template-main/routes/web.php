@@ -1,7 +1,8 @@
 <?php
-use App\Livewire\Admin\Layanan;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+// Import Komponen Livewire
 use App\Livewire\Admin\Articles;
 use App\Livewire\Admin\Awards;
 
@@ -17,11 +18,12 @@ Route::prefix('admin')
         Route::view('/log-activity', 'admin.log-activity')->name('log-activity');
         Route::view('/theme-settings', 'admin.theme-settings')->name('theme-settings');
         Route::view('/berita', 'admin.berita')->name('berita');
+        Route::view('/pejabat', 'admin.pejabat')->name('pejabat');
+        Route::view('/layanan', 'admin.layanan')->name('layanan');
 
         // 👇 Tambahkan 2 Route Livewire ini 👇
         Route::get('/articles', Articles::class)->name('articles');
         Route::get('/awards', Awards::class)->name('awards');
-        Route::view('/layanan', 'admin.layanan')->name('layanan');
 
         Route::view('/users', 'admin.users')
             ->name('users')

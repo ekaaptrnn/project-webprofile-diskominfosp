@@ -38,6 +38,11 @@
             <span>Kelola Berita</span>
         </a>
 
+        <a href="{{ route('admin.pejabat') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium {{ request()->routeIs('admin.pejabat') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
+            <span>&#128100;</span>
+            <span>Struktur Organisasi</span>
+        </a>
+
         <a href="{{ route('admin.layanan') }}"
     class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 {{ request()->routeIs('admin.layanan') ? 'bg-blue-600 text-white font-medium shadow-md' : 'text-gray-400 hover:text-white hover:bg-slate-800/50' }}">
 
