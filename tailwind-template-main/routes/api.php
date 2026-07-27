@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SkmController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BeritaController;
 use App\Http\Controllers\Api\ArticleController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\ThemeSettingController;
 use App\Http\Controllers\Api\LogActivityController;
 use App\Http\Controllers\Api\UserController;
+use App\Models\Award;
+
 
 // ============ ROUTE PUBLIK (tanpa login) ============
 Route::post('/login', [AuthController::class, 'login']);
@@ -26,6 +29,15 @@ Route::get('/layanan', [LayananController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
 
 Route::get('/theme', [ThemeSettingController::class, 'index']); // <- PASTIKAN INI DI LUAR GRUP
+
+Route::get('/awards', function () {
+    return response()->json(Award::latest()->get());
+});
+
+// ROUTE SKM (PUBLIK)
+Route::post('/skm/store', [SkmController::class, 'store']);
+Route::get('/skm/stats', [SkmController::class, 'getStats']); // <-- Diperbaiki ke getStats
+
 
 // ============ ROUTE YANG BUTUH LOGIN ============
 Route::middleware('auth:sanctum')->group(function () {
@@ -47,10 +59,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/theme', [ThemeSettingController::class, 'update']); // <- YANG PUT DI DALAM GRUP
     Route::get('/logs', [LogActivityController::class, 'index']);
 
-Route::middleware(['auth:sanctum', 'role:Super Admin'])->group(function () {
-    Route::get('/users', [UserController::class, 'index']);
-    Route::post('/users', [UserController::class, 'store']);
-    Route::put('/users/{id}', [UserController::class, 'update']);
-    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+    Route::middleware(['auth:sanctum', 'role:Super Admin'])->group(function () {
+        Route::get('/users', [UserController::class, 'index']);
+        Route::post('/users', [UserController::class, 'store']);
+        Route::put('/users/{id}', [UserController::class, 'update']);
+        Route::delete('/users/{id}', [UserController::class, 'destroy']);
     });
 });
