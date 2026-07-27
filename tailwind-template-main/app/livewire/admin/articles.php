@@ -3,12 +3,15 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
+use Livewire\WithFileUploads; // Trait untuk upload file
 use App\Models\Article; // Import Model Article
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\Log;
 
 class Articles extends Component
 {
+    use WithFileUploads; // Aktifkan fitur upload
+
     public $isModalOpen = false;
 
     // Field Form
@@ -17,10 +20,11 @@ class Articles extends Component
     public $author;
     public $category = 'Berita Utama';
     public $content;
+    public $image; // Variable untuk menampung gambar
 
     public function openModal()
     {
-        $this->reset(['title', 'author', 'content']);
+        $this->reset(['title', 'author', 'content', 'image']);
         $this->published_at = date('Y-m-d');
         $this->category = 'Berita Utama';
         $this->isModalOpen = true;
@@ -39,7 +43,14 @@ class Articles extends Component
             'author'       => 'required|min:3',
             'category'     => 'required',
             'content'      => 'required|min:10',
+            'image'        => 'nullable|image|max:2048', // Validasi gambar
         ]);
+
+        // Simpan gambar jika ada yang diupload
+        $imagePath = null;
+        if ($this->image) {
+            $imagePath = $this->image->store('articles', 'public');
+        }
 
         // 1. Simpan Data ke Database
         Article::create([
@@ -48,6 +59,7 @@ class Articles extends Component
             'author'       => $this->author,
             'category'     => $this->category,
             'content'      => $this->content,
+            'image'        => $imagePath,
         ]);
 
         $this->logActivity('CREATE', 'Artikel: ' . $this->title);

@@ -77,6 +77,11 @@
                         @error('title') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-1">Gambar / Thumbnail</label>
+                        <input type="file" wire:model="image" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer border border-gray-300 rounded-lg">
+                    </div>
+
                     <!-- Grid: Kategori, Penulis, Tanggal -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <!-- Kategori -->
