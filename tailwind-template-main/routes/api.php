@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\LogActivityController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\SkmController;
 use App\Http\Controllers\Api\UnduhanController;
+use App\Http\Controllers\Api\ArticleController;   
 
 // ============ ROUTE PUBLIK (tanpa login) ============
 Route::post('/login', [AuthController::class, 'login']);
@@ -25,6 +26,10 @@ Route::get('/theme', [ThemeSettingController::class, 'index']);
 
 // --- ROUTE PUBLIK UNDUHAN ---
 Route::get('/unduhan', [UnduhanController::class, 'index']);
+
+
+Route::get('/articles', [ArticleController::class, 'index']);  
+Route::get('/articles/{id}', [ArticleController::class, 'show']);
 
 // --- ROUTE PUBLIK SKM ---
 Route::post('/skm/store', [SkmController::class, 'store']);
