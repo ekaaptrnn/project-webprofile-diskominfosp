@@ -2,9 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Layanan extends Model
 {
-    protected $fillable = ['nama_layanan', 'icon_path', 'url_eksternal'];
+    use HasFactory;
+
+    protected $table = 'layanans';
+
+    protected $fillable = [
+        'nama_layanan',
+        'kategori',
+        'deskripsi',
+        'is_active',
+    ];
 }

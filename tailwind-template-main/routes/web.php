@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 // Import Komponen Livewire
 use App\Livewire\Admin\Articles;
 use App\Livewire\Admin\Awards;
+use App\Livewire\Admin\Layanan; // 👈 1. TAMBAHKAN IMPORT INI
 
 Route::view('/', 'welcome')->name('home');
 
@@ -19,10 +20,13 @@ Route::prefix('admin')
         Route::view('/theme-settings', 'admin.theme-settings')->name('theme-settings');
         Route::view('/berita', 'admin.berita')->name('berita');
         Route::view('/pejabat', 'admin.pejabat')->name('pejabat');
-        Route::view('/layanan', 'admin.layanan')->name('layanan');
+
+        // 👈 2. UBAH BARIS INI (Ganti Route::view menjadi Route::get memanggil Layanan::class)
+        Route::get('/layanan', Layanan::class)->name('layanan');
+
         Route::view('/dokumen', 'admin.dokumen')->name('dokumen');
 
-        // 👇 Tambahkan 2 Route Livewire ini 👇
+        // Route Livewire Lainnya
         Route::get('/articles', Articles::class)->name('articles');
         Route::get('/awards', Awards::class)->name('awards');
 
