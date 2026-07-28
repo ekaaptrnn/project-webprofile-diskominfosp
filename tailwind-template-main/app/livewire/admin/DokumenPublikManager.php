@@ -4,34 +4,37 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Layout;
 use App\Models\Dokumen;
 use App\Models\LogActivity;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class DokumenManager extends Component
+#[Layout('components.layouts.admin')]
+class DokumenPublikManager extends Component
 {
+    // ... sisanya tetap sama, tidak perlu diubah
     use WithFileUploads;
 
     public $isModalOpen = false;
     public $editingId = null;
 
     public $judul;
-    public $kategori = 'Informasi Berkala';
+    public $kategori = 'Rilis Data';
     public $file;
     public $existingFileName = null;
 
+    // Kategori Khusus Dokumen & Data Publik
     public $kategoriOptions = [
-        'Informasi Berkala',
-        'Informasi Setiap Saat',
-        'Informasi Serta Merta',
-        'Informasi Dikecualikan',
+        'Rilis Data',
+        'LKJIP',
+        'Statistik',
     ];
 
     public function openModal()
     {
         $this->reset(['editingId', 'judul', 'file', 'existingFileName']);
-        $this->kategori = 'Informasi Berkala';
+        $this->kategori = 'Rilis Data';
         $this->resetErrorBag();
         $this->isModalOpen = true;
     }
@@ -54,14 +57,14 @@ class DokumenManager extends Component
     {
         $this->isModalOpen = false;
         $this->reset(['editingId', 'judul', 'file', 'existingFileName']);
-        $this->kategori = 'Informasi Berkala';
+        $this->kategori = 'Rilis Data';
     }
 
     public function save()
     {
         $this->validate([
             'judul'    => 'required|min:3|max:255',
-            'kategori' => 'required|in:Informasi Berkala,Informasi Setiap Saat,Informasi Serta Merta,Informasi Dikecualikan',
+            'kategori' => 'required|in:' . implode(',', $this->kategoriOptions),
             'file'     => ($this->editingId ? 'nullable' : 'required') . '|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx|max:10240',
         ], [
             'judul.required'    => 'Judul dokumen wajib diisi',
@@ -91,12 +94,12 @@ class DokumenManager extends Component
         if ($this->editingId) {
             $dokumen = Dokumen::findOrFail($this->editingId);
             $dokumen->update($data);
-            $this->logActivity('UPDATE', 'Dokumen: ' . $this->judul);
-            session()->flash('message', 'Dokumen berhasil diperbarui!');
+            $this->logActivity('UPDATE', 'Dokumen Publik: ' . $this->judul);
+            session()->flash('message', 'Dokumen publik berhasil diperbarui!');
         } else {
             Dokumen::create($data);
-            $this->logActivity('CREATE', 'Dokumen: ' . $this->judul);
-            session()->flash('message', 'Dokumen berhasil ditambahkan!');
+            $this->logActivity('CREATE', 'Dokumen Publik: ' . $this->judul);
+            session()->flash('message', 'Dokumen publik berhasil ditambahkan!');
         }
 
         $this->closeModal();
@@ -112,15 +115,15 @@ class DokumenManager extends Component
         }
         $dokumen->delete();
 
-        $this->logActivity('DELETE', 'Dokumen: ' . $judul);
-        session()->flash('message', 'Dokumen berhasil dihapus.');
+        $this->logActivity('DELETE', 'Dokumen Publik: ' . $judul);
+        session()->flash('message', 'Dokumen publik berhasil dihapus.');
     }
 
     private function logActivity(string $method, string $description): void
     {
         LogActivity::create([
             'user_id'     => auth()->id(),
-            'subject'     => 'Dokumen',
+            'subject'     => 'Dokumen Publik',
             'method'      => $method,
             'ip_address'  => request()->ip(),
             'description' => $description,
@@ -128,7 +131,7 @@ class DokumenManager extends Component
         ]);
 
         Log::channel('audit')->info(sprintf(
-            'user_id=%s subject=Dokumen method=%s ip=%s status=success description=%s',
+            'user_id=%s subject=DokumenPublik method=%s ip=%s status=success description=%s',
             auth()->id(),
             $method,
             request()->ip(),
@@ -138,8 +141,7 @@ class DokumenManager extends Component
 
     public function render()
     {
-        return view('livewire.admin.dokumen-manager', [
-            // Tambahkan filter whereIn kategori PPID ini
+        return view('livewire.admin.dokumen-publik-manager', [
             'dokumenList' => Dokumen::whereIn('kategori', $this->kategoriOptions)
                 ->latest()
                 ->get(),

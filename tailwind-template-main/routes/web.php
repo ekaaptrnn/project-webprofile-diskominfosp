@@ -2,11 +2,15 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 // Import Komponen Livewire
 use App\Livewire\Admin\Articles;
 use App\Livewire\Admin\Awards;
-use App\Livewire\Admin\Layanan; // 👈 1. TAMBAHKAN IMPORT INI
+use App\Livewire\Admin\Layanan;
 use App\Livewire\Admin\SkmManager;
+use App\Livewire\Admin\DokumenManager;       // 👈 Komponen Dokumen PPID
+use App\Livewire\Admin\DokumenPublikManager; // 👈 Komponen Dokumen Publik
+use App\Livewire\Admin\PodcastManager;       // 👈 Komponen Podcast (KOMINPOD)
 
 Route::view('/', 'welcome')->name('home');
 
@@ -22,10 +26,19 @@ Route::prefix('admin')
         Route::view('/berita', 'admin.berita')->name('berita');
         Route::view('/pejabat', 'admin.pejabat')->name('pejabat');
 
-        // 👈 2. UBAH BARIS INI (Ganti Route::view menjadi Route::get memanggil Layanan::class)
         Route::get('/layanan', Layanan::class)->name('layanan');
 
-        Route::view('/dokumen', 'admin.dokumen')->name('dokumen');
+        // -------------------------------------------------------------
+        // ROUTE DOKUMEN & PODCAST:
+        // 1. Dokumen PPID (Informasi Berkala, Setiap Saat, dll)
+        Route::get('/dokumen-ppid', DokumenManager::class)->name('dokumen');
+
+        // 2. Data Publik (Rilis Data, LKJIP, Statistik)
+        Route::get('/dokumen-publik', DokumenPublikManager::class)->name('dokumen-publik');
+
+        // 3. Podcast / KOMINPOD
+        Route::get('/podcast', PodcastManager::class)->name('podcast');
+        // -------------------------------------------------------------
 
         Route::get('/skm', SkmManager::class)->name('skm');
 
