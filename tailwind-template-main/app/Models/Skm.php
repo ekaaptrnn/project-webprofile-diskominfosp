@@ -31,4 +31,12 @@ class Skm extends Model
         'jawaban_9',
         'saran',
     ];
+
+    /**
+     * Relasi ke layanan yang dinilai pada survei ini.
+     */
+    public function jenisLayanan()
+    {
+        return $this->belongsTo(Layanan::class, 'jenis_layanan_id');
+    }
 }

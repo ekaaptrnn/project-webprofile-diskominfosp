@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\Articles;
 use App\Livewire\Admin\Awards;
 use App\Livewire\Admin\Layanan; // 👈 1. TAMBAHKAN IMPORT INI
+use App\Livewire\Admin\SkmManager;
 
 Route::view('/', 'welcome')->name('home');
 
@@ -25,6 +26,8 @@ Route::prefix('admin')
         Route::get('/layanan', Layanan::class)->name('layanan');
 
         Route::view('/dokumen', 'admin.dokumen')->name('dokumen');
+
+        Route::get('/skm', SkmManager::class)->name('skm');
 
         // Route Livewire Lainnya
         Route::get('/articles', Articles::class)->name('articles');

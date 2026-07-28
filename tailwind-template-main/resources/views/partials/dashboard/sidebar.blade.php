@@ -53,6 +53,11 @@
             <span>Kelola Dokumen PPID</span>
         </a>
 
+        <a href="{{ route('admin.skm') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium {{ request()->routeIs('admin.skm') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">
+            <span>&#128203;</span>
+            <span>Kelola Data SKM</span>
+        </a>
+
         <!-- Menu Kelola Artikel -->
         <a href="{{ route('admin.articles') }}"
             class="flex items-center gap-3 px-4 py-3 rounded-lg transition {{ request()->routeIs('admin.articles') ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-gray-800' }}">
