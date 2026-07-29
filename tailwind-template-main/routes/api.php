@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\PejabatController;
 use App\Http\Controllers\Api\AwardController;
 use App\Http\Controllers\Api\DokumenController;
+use App\Http\Controllers\Api\PodcastController;
 use App\Http\Controllers\Api\LayananController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\ThemeSettingController;
@@ -30,6 +31,8 @@ Route::get('/pejabat', [PejabatController::class, 'index']);
 Route::get('/awards', [AwardController::class, 'index']);
 
 Route::get('/dokumen', [DokumenController::class, 'index']);
+Route::get('/dokumen-publik', [DokumenController::class, 'indexPublik']);
+Route::get('/podcast', [PodcastController::class, 'index']);
 
 Route::get('/layanan', [LayananController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
