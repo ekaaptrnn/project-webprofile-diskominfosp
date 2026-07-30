@@ -169,3 +169,56 @@ new class extends Component
         {{ $users->links() }}
     </div>
 
+    @if ($showModal)
+        <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+            <div class="bg-white dark:bg-[#0c1427] rounded-md shadow-lg w-full max-w-md p-6 relative">
+                <h2 class="text-xl font-bold text-black dark:text-white mb-4">
+                    {{ $editingId ? 'Edit Akun Admin' : 'Tambah Akun Admin Baru' }}
+                </h2>
+
+                <form wire:submit.prevent="save">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama</label>
+                        <input type="text" wire:model="name" class="w-full px-3 py-2 border border-gray-300 dark:border-[#172036] rounded-md dark:bg-[#15203c] dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Nama lengkap">
+                        @error('name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
+                        <input type="email" wire:model="email" class="w-full px-3 py-2 border border-gray-300 dark:border-[#172036] rounded-md dark:bg-[#15203c] dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="email@contoh.com">
+                        @error('email') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                            Password {{ $editingId ? '(kosongkan jika tidak diubah)' : '' }}
+                        </label>
+                        <input type="password" wire:model="password" class="w-full px-3 py-2 border border-gray-300 dark:border-[#172036] rounded-md dark:bg-[#15203c] dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Minimal 8 karakter">
+                        @error('password') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
+                        <select wire:model="role_id" class="w-full px-3 py-2 border border-gray-300 dark:border-[#172036] rounded-md dark:bg-[#15203c] dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">-- Pilih Role --</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('role_id') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="flex justify-end gap-3 pt-3 border-t border-gray-100 dark:border-[#172036]">
+                        <button type="button" wire:click="$set('showModal', false)" class="px-4 py-2 bg-gray-200 dark:bg-[#172036] text-gray-700 dark:text-gray-200 rounded-md hover:bg-gray-300 transition">
+                            Batal
+                        </button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+                            {{ $editingId ? 'Simpan Perubahan' : 'Simpan Akun' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
+
+</div>

@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <nav class="flex-1 overflow-y-auto p-4">
+    <nav class="flex-1 overflow-y-auto p-4 pr-3">
         <p class="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-slate-400">Main</p>
 
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 rounded-lg px-4 py-3 font-medium {{ request()->routeIs('admin.dashboard') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-slate-800' }}">

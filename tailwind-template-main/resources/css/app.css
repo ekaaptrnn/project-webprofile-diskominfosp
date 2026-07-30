@@ -11,3 +11,21 @@
 .font-serif {
     font-family: Georgia, 'Times New Roman', serif;
 }
+
+aside nav {
+    scrollbar-width: thin;
+    scrollbar-color: #475569 transparent;
+}
+aside nav::-webkit-scrollbar {
+    width: 6px;
+}
+aside nav::-webkit-scrollbar-track {
+    background: transparent;
+}
+aside nav::-webkit-scrollbar-thumb {
+    background-color: #475569;
+    border-radius: 9999px;
+}
+aside nav::-webkit-scrollbar-thumb:hover {
+    background-color: #64748b;
+}
