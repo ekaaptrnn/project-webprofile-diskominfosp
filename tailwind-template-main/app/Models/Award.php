@@ -9,7 +9,10 @@ class Award extends Model
 {
     use HasFactory;
 
-    protected $table = 'awards';
-
-    protected $guarded = [];
+    protected $fillable = [
+        'title',
+        'year',
+        'image',
+        'description',
+    ];
 }

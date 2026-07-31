@@ -4,159 +4,134 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use App\Models\Award; // Import model Award
-use App\Models\LogActivity;
-use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\Layout;
+use App\Models\Award;
 use Illuminate\Support\Facades\Storage;
 
+#[Layout('components.layouts.admin')]
 class Awards extends Component
 {
+    use WithFileUploads;
+
+    // ... sisanya tetap sama
     use WithFileUploads;
 
     public $isModalOpen = false;
     public $editingId = null;
 
-    public $title;
+    public $nama_penghargaan;
+    public $tahun;
+    public $gambar;
+    public $existingGambar;
+    public $deskripsi;
 
-    public $category;
-    public $description;
-    public $image;
-    public $year;
-    public $existingImage = null;
+    public function render()
+    {
+    return view('livewire.admin.awards', [
+        'awards' => Award::latest()->get()
+    ]);
+    }
 
     public function openModal()
     {
-        $this->reset(['editingId', 'title', 'description', 'image', 'existingImage']);
-        $this->year = date('Y');
-        $this->resetErrorBag();
+        $this->resetFields();
         $this->isModalOpen = true;
     }
 
-    public function openEdit(int $id)
+    public function openEdit($id)
     {
+        $this->resetFields();
         $award = Award::findOrFail($id);
 
         $this->editingId = $award->id;
-        $this->title = $award->title;
-        $this->description = $award->description;
-        $this->year = $award->year;
-        $this->existingImage = $award->image;
-        $this->image = null;
+        // Mengambil data dari database (Mendukung nama kolom title / year / image / description)
+        $this->nama_penghargaan = $award->title ?? $award->nama_penghargaan;
+        $this->tahun = $award->year ?? $award->tahun;
+        $this->deskripsi = $award->description ?? $award->deskripsi;
+        $this->existingGambar = $award->image ?? $award->gambar;
 
-        $this->resetErrorBag();
         $this->isModalOpen = true;
     }
 
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->reset(['editingId', 'title','category', 'description', 'image', 'year', 'existingImage']);
+        $this->resetFields();
+    }
+
+    public function resetFields()
+    {
+        $this->editingId = null;
+        $this->nama_penghargaan = '';
+        $this->tahun = date('Y');
+        $this->gambar = null;
+        $this->existingGambar = null;
+        $this->deskripsi = '';
     }
 
     public function save()
     {
-    $this->validate([
-        'title'       => 'required',
-        'year'        => 'required',
-        'description' => 'required',
-        'image'       => 'nullable|image|max:2048',
-    ]);
+        $rules = [
+            'nama_penghargaan' => 'required|string|max:255',
+            'tahun'            => 'required|numeric',
+            'deskripsi'        => 'nullable|string',
+        ];
 
-
-
-    $data = [];
-
-    // Mengisi Judul
-    if (\Schema::hasColumn('awards', 'title')) {
-        $data['title'] = $this->title;
-    } elseif (\Schema::hasColumn('awards', 'judul')) {
-        $data['judul'] = $this->title;
-    }
-
-    // Mengisi Tahun
-    if (\Schema::hasColumn('awards', 'year')) {
-        $data['year'] = $this->year;
-    } elseif (\Schema::hasColumn('awards', 'tahun')) {
-        $data['tahun'] = $this->year;
-    }
-
-    // Mengisi Deskripsi
-    if (\Schema::hasColumn('awards', 'description')) {
-        $data['description'] = $this->description;
-    } elseif (\Schema::hasColumn('awards', 'deskripsi')) {
-        $data['deskripsi'] = $this->description;
-    }
-
-    // Mengisi Gambar jika ada
-    if ($this->image) {
-        $path = $this->image->store('awards', 'public');
-        if (\Schema::hasColumn('awards', 'image')) {
-            $data['image'] = $path;
-        } elseif (\Schema::hasColumn('awards', 'gambar')) {
-            $data['gambar'] = $path;
-        } elseif (\Schema::hasColumn('awards', 'thumbnail')) {
-            $data['thumbnail'] = $path;
+        if ($this->editingId) {
+            $rules['gambar'] = 'nullable|image|max:2048';
+        } else {
+            $rules['gambar'] = 'required|image|max:2048';
         }
-    }
 
-    // Simpan ke Database
-    if ($this->editingId) {
-        Award::findOrFail($this->editingId)->update($data);
-    } else {
-        Award::create($data);
-    }
+        $this->validate($rules);
 
-    $this->reset(['editingId', 'title', 'category', 'description', 'image', 'year', 'existingImage']);
-    if (method_exists($this, 'closeModal')) {
+        if ($this->editingId) {
+            $award = Award::findOrFail($this->editingId);
+            $imagePath = $award->image ?? $award->gambar;
+
+            if ($this->gambar) {
+                if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                    Storage::disk('public')->delete($imagePath);
+                }
+                $imagePath = $this->gambar->store('awards', 'public');
+            }
+
+            // Disimpan ke kolom DB: title, year, image, description
+            $award->update([
+                'title'       => $this->nama_penghargaan,
+                'year'        => $this->tahun,
+                'image'       => $imagePath,
+                'description' => $this->deskripsi,
+            ]);
+
+            session()->flash('message', 'Penghargaan berhasil diperbarui!');
+        } else {
+            $imagePath = $this->gambar->store('awards', 'public');
+
+            // Disimpan ke kolom DB: title, year, image, description
+            Award::create([
+                'title'       => $this->nama_penghargaan,
+                'year'        => $this->tahun,
+                'image'       => $imagePath,
+                'description' => $this->deskripsi,
+            ]);
+
+            session()->flash('message', 'Penghargaan berhasil ditambahkan!');
+        }
+
         $this->closeModal();
-    } else {
-        $this->isModalOpen = false;
     }
 
-    session()->flash('message', 'Penghargaan berhasil disimpan!');
-    }
-    public function delete(int $id)
+    public function delete($id)
     {
-        $award = Award::findOrFail($id);
-        $title = $award->title;
-
-        if ($award->image) {
-            Storage::disk('public')->delete($award->image);
+        $award = Award::find($id);
+        if ($award) {
+            $imagePath = $award->image ?? $award->gambar;
+            if ($imagePath && Storage::disk('public')->exists($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
+            }
+            $award->delete();
+            session()->flash('message', 'Penghargaan berhasil dihapus!');
         }
-        $award->delete();
-
-        $this->logActivity('DELETE', 'Penghargaan: ' . $title);
-
-        session()->flash('message', 'Penghargaan berhasil dihapus.');
-    }
-
-    private function logActivity(string $method, string $description): void
-    {
-        // 1. Simpan ke database
-        LogActivity::create([
-            'user_id'     => auth()->id(),
-            'subject'     => 'Penghargaan',
-            'method'      => $method,
-            'ip_address'  => request()->ip(),
-            'description' => $description,
-            'status'      => 'success',
-        ]);
-
-        // 2. Simpan juga ke file storage/logs/audit.log
-        Log::channel('audit')->info(sprintf(
-            'user_id=%s subject=Penghargaan method=%s ip=%s status=success description=%s',
-            auth()->id(),
-            $method,
-            request()->ip(),
-            $description
-        ));
-    }
-
-    public function render()
-    {
-        // Ambil seluruh data penghargaan dari database (paling baru di atas)
-        return view('livewire.admin.awards', [
-            'awards' => Award::latest()->get()
-        ])->layout('layouts.admin', ['title' => 'Kelola Penghargaan']);
     }
 }

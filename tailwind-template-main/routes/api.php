@@ -14,11 +14,32 @@ use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\ThemeSettingController;
 use App\Http\Controllers\Api\LogActivityController;
 use App\Http\Controllers\Api\UserController;
-use App\Models\Award;
-
+use App\Models\VisitorLog;
+use Carbon\Carbon;
 
 // ============ ROUTE PUBLIK (tanpa login) ============
 Route::post('/login', [AuthController::class, 'login']);
+
+// 👈 1. ROUTE PENGUNJUNG / VISITOR STATS (BARU)
+Route::get('/visitor-stats', function () {
+    // Otomatis catat IP pengunjung
+    VisitorLog::firstOrCreate([
+        'ip_address' => request()->ip(),
+        'visit_date' => now()->toDateString(),
+    ]);
+
+    $today = Carbon::today()->toDateString();
+    $yesterday = Carbon::yesterday()->toDateString();
+    $currentMonth = Carbon::now()->month;
+    $currentYear = Carbon::now()->year;
+
+    return response()->json([
+        'hari_ini'  => VisitorLog::where('visit_date', $today)->count(),
+        'kemarin'   => VisitorLog::where('visit_date', $yesterday)->count(),
+        'bulan_ini' => VisitorLog::whereYear('visit_date', $currentYear)->whereMonth('visit_date', $currentMonth)->count(),
+        'total'     => VisitorLog::count(),
+    ]);
+});
 
 Route::get('/berita', [BeritaController::class, 'index']);
 Route::get('/berita/{id}', [BeritaController::class, 'show']);
@@ -37,15 +58,11 @@ Route::get('/podcast', [PodcastController::class, 'index']);
 Route::get('/layanan', [LayananController::class, 'index']);
 Route::get('/kategori', [KategoriController::class, 'index']);
 
-Route::get('/theme', [ThemeSettingController::class, 'index']); // <- PASTIKAN INI DI LUAR GRUP
-
-Route::get('/awards', function () {
-    return response()->json(Award::latest()->get());
-});
+Route::get('/theme', [ThemeSettingController::class, 'index']);
 
 // ROUTE SKM (PUBLIK)
 Route::post('/skm/store', [SkmController::class, 'store']);
-Route::get('/skm/stats', [SkmController::class, 'getStats']); // <-- Diperbaiki ke getStats
+Route::get('/skm/stats', [SkmController::class, 'getStats']);
 
 
 // ============ ROUTE YANG BUTUH LOGIN ============
@@ -65,7 +82,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/kategori/{id}', [KategoriController::class, 'update']);
     Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 
-    Route::put('/theme', [ThemeSettingController::class, 'update']); // <- YANG PUT DI DALAM GRUP
+    Route::put('/theme', [ThemeSettingController::class, 'update']);
     Route::get('/logs', [LogActivityController::class, 'index']);
 
     Route::middleware(['auth:sanctum', 'role:Super Admin'])->group(function () {

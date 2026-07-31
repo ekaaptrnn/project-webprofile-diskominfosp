@@ -35,24 +35,27 @@
                     @forelse ($awards as $item)
                         <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/30 transition">
                             <td class="px-6 py-4">
-                                @if($item->image)
-                                    <img src="{{ asset('storage/' . $item->image) }}" class="w-16 h-12 object-cover rounded-lg border border-gray-200 dark:border-gray-600">
+                                @php
+                                    $imagePath = $item->gambar ?? $item->image;
+                                @endphp
+                                @if($imagePath)
+                                    <img src="{{ asset('storage/' . $imagePath) }}" class="w-16 h-12 object-cover rounded-lg border border-gray-200 dark:border-gray-600">
                                 @else
                                     <div class="w-16 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center border border-gray-200">
                                         <span class="text-xs text-gray-400">No Image</span>
                                     </div>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                {{ $item->title }}
+                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white max-w-xs">
+                                {{ $item->nama_penghargaan ?? $item->title }}
                             </td>
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
-                                {{ $item->year }}
+                                {{ $item->tahun ?? $item->year }}
                             </td>
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-400 max-w-xs truncate">
-                                {{ $item->description }}
+                                {{ $item->deskripsi ?? $item->description ?? '-' }}
                             </td>
-                            <td class="px-6 py-4 text-center space-x-2">
+                            <td class="px-6 py-4 text-center space-x-2 whitespace-nowrap">
                                 <button wire:click="openEdit({{ $item->id }})" class="text-blue-600 dark:text-blue-400 hover:underline">Edit</button>
                                 <button wire:click="delete({{ $item->id }})" wire:confirm="Yakin ingin menghapus penghargaan ini?" class="text-red-600 dark:text-red-400 hover:underline">Hapus</button>
                             </td>
@@ -60,19 +63,25 @@
                     @empty
                         <tr>
                             <td colspan="5" class="px-6 py-8 text-center text-gray-400">
-                                Belum ada data penghargaan. Klik tombol <b>+ Tambah Penghargaan</b> untuk menambahkan.
+                                Belum ada penghargaan. Klik tombol <b>+ Tambah Penghargaan</b> untuk menambahkan.
                             </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
+
+        @if(method_exists($awards, 'hasPages') && $awards->hasPages())
+            <div class="px-6 py-4 border-t border-gray-100 dark:border-gray-700">
+                {{ $awards->links() }}
+            </div>
+        @endif
     </div>
 
     <!-- MODAL FORM TAMBAH / EDIT PENGHARGAAN -->
     @if($isModalOpen)
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg w-full max-w-lg p-6 relative max-h-[90vh] overflow-y-auto">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg w-full max-w-2xl p-6 relative max-h-[90vh] overflow-y-auto">
                 <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
                     {{ $editingId ? 'Edit Penghargaan' : 'Tambah Penghargaan Baru' }}
                 </h2>
@@ -81,45 +90,45 @@
                     <!-- Nama Penghargaan -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Nama Penghargaan</label>
-                        <input type="text" wire:model="title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama penghargaan...">
-                        @error('title') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                        <input type="text" wire:model="nama_penghargaan" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan nama penghargaan...">
+                        @error('nama_penghargaan') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
-                    <!-- Tahun Penghargaan -->
+                    <!-- Tahun -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Tahun</label>
-                        <input type="number" wire:model="year" min="2000" max="{{ date('Y') + 1 }}" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Contoh: 2026">
-                        @error('year') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                        <input type="number" wire:model="tahun" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Masukkan tahun...">
+                        @error('tahun') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
-                    <!-- Gambar Penghargaan -->
+                    <!-- Gambar / Foto -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Gambar/Foto Penghargaan</label>
 
-                        @if ($existingImage && ! $image)
+                        @if ($existingGambar && ! $gambar)
                             <div class="mb-2">
                                 <p class="text-xs text-gray-500 mb-1">Gambar saat ini:</p>
-                                <img src="{{ asset('storage/' . $existingImage) }}" class="w-full h-32 object-cover rounded-lg border border-gray-200">
+                                <img src="{{ asset('storage/' . $existingGambar) }}" class="w-full h-40 object-cover rounded-lg border border-gray-200">
                             </div>
                         @endif
 
-                        <input type="file" wire:model="image" accept="image/*" class="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        <div wire:loading wire:target="image" class="mt-1 text-xs text-gray-500">Mengunggah...</div>
-                        @error('image') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                        <input type="file" wire:model="gambar" accept="image/*" class="w-full text-sm text-gray-500 dark:text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <div wire:loading wire:target="gambar" class="mt-1 text-xs text-gray-500">Mengunggah...</div>
+                        @error('gambar') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
 
-                        @if ($image)
+                        @if ($gambar)
                             <div class="mt-3">
                                 <p class="text-xs text-gray-500 mb-1">Preview Gambar Baru:</p>
-                                <img src="{{ $image->temporaryUrl() }}" class="w-full h-32 object-cover rounded-lg border border-gray-200">
+                                <img src="{{ $gambar->temporaryUrl() }}" class="w-full h-40 object-cover rounded-lg border border-gray-200">
                             </div>
                         @endif
                     </div>
 
-                    <!-- Deskripsi Penghargaan -->
+                    <!-- Deskripsi -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Deskripsi Penghargaan</label>
-                        <textarea wire:model="description" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3" placeholder="Masukkan deskripsi penghargaan..."></textarea>
-                        @error('description') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                        <textarea wire:model="deskripsi" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" placeholder="Tulis deskripsi penghargaan di sini..."></textarea>
+                        @error('deskripsi') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 
                     <!-- Tombol Aksi -->

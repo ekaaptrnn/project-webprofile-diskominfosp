@@ -15,9 +15,15 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectGuestsTo(fn () => route('admin.login'));
 
+        // 👈 1. TAMBAHKAN BARIS INI UNTUK MENCATAT PENGUNJUNG WEB:
+        $middleware->web(append: [
+            \App\Http\Middleware\TrackVisitor::class,
+        ]);
+
         $middleware->api(append: [
             \App\Http\Middleware\LogActivity::class,
         ]);
+
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
         ]);
