@@ -9,7 +9,7 @@
         <div>
             <h1 class="text-2xl font-bold text-black dark:text-white">Kelola Struktur Organisasi</h1>
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                2 pejabat dengan status "Tampilkan di Beranda" akan muncul di homepage. Semua pejabat tampil di halaman "Struktur Organisasi" lengkap, diurutkan berdasarkan kolom Urutan.
+                2 pejabat dengan status "Tampilkan di Beranda" akan muncul di homepage. Pilih "Atasan" untuk menyusun hierarki lengkap yang tampil di halaman "Struktur Organisasi".
             </p>
         </div>
 
@@ -27,6 +27,7 @@
                         <th class="px-6 py-4">Foto</th>
                         <th class="px-6 py-4">Nama</th>
                         <th class="px-6 py-4">Jabatan</th>
+                        <th class="px-6 py-4">Atasan</th>
                         <th class="px-6 py-4 text-center">Tampil di Beranda</th>
                         <th class="px-6 py-4 text-center">Aksi</th>
                     </tr>
@@ -46,6 +47,13 @@
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{ $item->nama }}</td>
                             <td class="px-6 py-4 text-gray-500 dark:text-gray-400">{{ $item->jabatan }}</td>
+                            <td class="px-6 py-4 text-gray-500 dark:text-gray-400">
+                                @if ($item->parent)
+                                    <span class="text-xs">↳ {{ $item->parent->nama }}</span>
+                                @else
+                                    <span class="text-xs italic text-gray-400">— Level Teratas</span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 text-center">
                                 @if($item->tampil_utama)
                                     <span class="px-3 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">Ya</span>
@@ -55,12 +63,12 @@
                             </td>
                             <td class="px-6 py-4 text-center space-x-2 whitespace-nowrap">
                                 <button wire:click="openEdit({{ $item->id }})" class="text-blue-600 dark:text-blue-400 hover:underline">Edit</button>
-                                <button wire:click="delete({{ $item->id }})" wire:confirm="Yakin ingin menghapus pejabat ini?" class="text-red-600 dark:text-red-400 hover:underline">Hapus</button>
+                                <button wire:click="delete({{ $item->id }})" wire:confirm="Yakin ingin menghapus pejabat ini? Bawahan langsungnya (jika ada) tidak akan ikut terhapus, hanya jadi tidak punya atasan." class="text-red-600 dark:text-red-400 hover:underline">Hapus</button>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="px-6 py-8 text-center text-gray-400">
+                            <td colspan="7" class="px-6 py-8 text-center text-gray-400">
                                 Belum ada data pejabat. Klik tombol <b>+ Tambah Pejabat</b> untuk menambahkan.
                             </td>
                         </tr>
@@ -91,9 +99,21 @@
                     </div>
 
                     <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Atasan</label>
+                        <select wire:model="parent_id" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">— Tidak ada (Level Teratas) —</option>
+                            @foreach ($pejabatOptions as $opt)
+                                <option value="{{ $opt->id }}">{{ $opt->nama }} ({{ $opt->jabatan }})</option>
+                            @endforeach
+                        </select>
+                        <p class="text-xs text-gray-400 mt-1">Menentukan posisi pejabat ini di struktur pohon halaman publik.</p>
+                        @error('parent_id') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Urutan Tampil</label>
                         <input type="number" wire:model="urutan" min="0" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <p class="text-xs text-gray-400 mt-1">Angka lebih kecil tampil lebih dulu.</p>
+                        <p class="text-xs text-gray-400 mt-1">Angka lebih kecil tampil lebih dulu (di antara pejabat dengan atasan yang sama).</p>
                         @error('urutan') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                     </div>
 

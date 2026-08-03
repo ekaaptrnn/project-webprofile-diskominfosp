@@ -20,12 +20,13 @@ class PejabatManager extends Component
     public $jabatan;
     public $urutan = 0;
     public $tampil_utama = false;
+    public $parent_id = null;
     public $foto;
     public $existingFoto = null;
 
     public function openModal()
     {
-        $this->reset(['editingId', 'nama', 'jabatan', 'foto', 'existingFoto']);
+        $this->reset(['editingId', 'nama', 'jabatan', 'foto', 'existingFoto', 'parent_id']);
         $this->urutan = Pejabat::max('urutan') + 1;
         $this->tampil_utama = false;
         $this->resetErrorBag();
@@ -41,6 +42,7 @@ class PejabatManager extends Component
         $this->jabatan = $pejabat->jabatan;
         $this->urutan = $pejabat->urutan;
         $this->tampil_utama = (bool) $pejabat->tampil_utama;
+        $this->parent_id = $pejabat->parent_id;
         $this->existingFoto = $pejabat->foto;
         $this->foto = null;
 
@@ -51,7 +53,7 @@ class PejabatManager extends Component
     public function closeModal()
     {
         $this->isModalOpen = false;
-        $this->reset(['editingId', 'nama', 'jabatan', 'foto', 'existingFoto']);
+        $this->reset(['editingId', 'nama', 'jabatan', 'foto', 'existingFoto', 'parent_id']);
         $this->tampil_utama = false;
     }
 
@@ -63,16 +65,24 @@ class PejabatManager extends Component
             'urutan'       => 'required|integer|min:0',
             'foto'         => 'nullable|image|max:2048',
             'tampil_utama' => 'boolean',
+            'parent_id'    => 'nullable|exists:pejabats,id',
         ], [
             'nama.required'    => 'Nama pejabat wajib diisi',
             'jabatan.required' => 'Jabatan wajib diisi',
         ]);
+
+        // Cegah orang jadi atasan dirinya sendiri
+        if ($this->editingId && $this->parent_id == $this->editingId) {
+            $this->addError('parent_id', 'Pejabat tidak bisa menjadi atasan dirinya sendiri.');
+            return;
+        }
 
         $data = [
             'nama'         => $this->nama,
             'jabatan'      => $this->jabatan,
             'urutan'       => $this->urutan,
             'tampil_utama' => $this->tampil_utama,
+            'parent_id'    => $this->parent_id ?: null,
         ];
 
         if ($this->foto) {
@@ -107,6 +117,7 @@ class PejabatManager extends Component
         if ($pejabat->foto) {
             Storage::disk('public')->delete($pejabat->foto);
         }
+        // Bawahan otomatis jadi parent_id null (lihat migration: nullOnDelete)
         $pejabat->delete();
 
         $this->logActivity('DELETE', 'Pejabat: ' . $nama);
@@ -136,7 +147,10 @@ class PejabatManager extends Component
     public function render()
     {
         return view('livewire.admin.pejabat-manager', [
-            'pejabatList' => Pejabat::orderBy('urutan')->orderBy('id')->get(),
+            'pejabatList'    => Pejabat::with('parent')->orderBy('urutan')->orderBy('id')->get(),
+            // Untuk dropdown "Atasan": semua pejabat KECUALI yang lagi diedit sendiri
+            'pejabatOptions' => Pejabat::orderBy('urutan')->orderBy('id')->get()
+                ->reject(fn ($p) => $p->id === $this->editingId),
         ]);
     }
 }
