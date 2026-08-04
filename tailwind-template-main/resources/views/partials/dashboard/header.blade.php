@@ -5,5 +5,10 @@
                 Panel {{ auth()->user()->role->name ?? 'Admin' }} — Diskominfo SP
             </h2>
         </div>
+
+        <div class="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600">
+            Session berakhir dalam
+            <strong id="admin-session-countdown" class="ml-1 font-mono text-gray-900">--:--</strong>
+        </div>
     </div>
 </header>

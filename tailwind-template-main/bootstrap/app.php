@@ -18,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // 👈 1. TAMBAHKAN BARIS INI UNTUK MENCATAT PENGUNJUNG WEB:
         $middleware->web(append: [
             \App\Http\Middleware\TrackVisitor::class,
+            \App\Http\Middleware\ExpireAdminSession::class,
         ]);
 
         $middleware->api(append: [

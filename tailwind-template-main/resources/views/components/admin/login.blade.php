@@ -8,7 +8,6 @@ new class extends Component
 {
     public string $email = '';
     public string $password = '';
-    public bool $remember = false;
 
     public function login(): void
     {
@@ -17,7 +16,7 @@ new class extends Component
             'password' => 'required',
         ]);
 
-        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], false)) {
             ActivityLogger::log(
                 'Percobaan login dashboard gagal: ' . $this->email,
                 'LOGIN',
@@ -31,6 +30,9 @@ new class extends Component
         }
 
         request()->session()->regenerate();
+
+        $expiresAt = now()->addMinutes((int) config('session.admin_timeout', 15));
+        request()->session()->put('admin_session_expires_at', $expiresAt->timestamp);
 
         ActivityLogger::log(
             'User Login Dashboard: ' . Auth::user()->email,
@@ -61,11 +63,6 @@ new class extends Component
             <input type="password" wire:model="password" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm">
             @error('password') <p class="mt-1 text-xs text-red-500">{{ $message }}</p> @enderror
         </div>
-
-        <label class="flex items-center gap-2 text-sm text-gray-600">
-            <input type="checkbox" wire:model="remember">
-            <span>Ingat saya</span>
-        </label>
 
         <button type="submit" class="w-full rounded-md bg-blue-600 py-2.5 text-sm font-medium text-white hover:bg-blue-700">
             Masuk

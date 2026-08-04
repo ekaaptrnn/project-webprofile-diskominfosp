@@ -34,6 +34,9 @@ return [
 
     'lifetime' => (int) env('SESSION_LIFETIME', 120),
 
+    // Durasi maksimum akses dashboard admin sejak login (menit).
+    'admin_timeout' => (int) env('ADMIN_SESSION_TIMEOUT', 15),
+
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
 
     /*

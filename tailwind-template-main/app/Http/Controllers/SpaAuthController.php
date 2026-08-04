@@ -52,8 +52,12 @@ class SpaAuthController extends Controller
             return response()->json(['message' => 'Akun ini sudah dinonaktifkan. Hubungi Super Admin.'], 403);
         }
 
-        Auth::login($user, $request->boolean('remember'));
+        // Jangan memakai remember cookie karena admin wajib login ulang setelah timeout.
+        Auth::login($user, false);
         $request->session()->regenerate();
+
+        $expiresAt = now()->addMinutes((int) config('session.admin_timeout', 15));
+        $request->session()->put('admin_session_expires_at', $expiresAt->timestamp);
 
         $user->forceFill(['last_login_at' => now()])->save();
 
@@ -61,7 +65,8 @@ class SpaAuthController extends Controller
 
         return response()->json([
             'message' => 'Login berhasil',
-            'user'    => $user->load('role'),
+            'user'       => $user->load('role'),
+            'expires_at' => $expiresAt->toIso8601String(),
         ]);
     }
 }

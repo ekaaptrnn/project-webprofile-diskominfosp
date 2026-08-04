@@ -46,6 +46,11 @@ Route::prefix('admin')
             Auth::logout();
             request()->session()->invalidate();
             request()->session()->regenerateToken();
-            return redirect()->route('admin.login');
+
+            if (request()->expectsJson()) {
+                return response()->json(['message' => 'Logout berhasil']);
+            }
+
+            return redirect()->away((string) config('app.admin_login_url', route('admin.login')));
         })->name('logout');
     });
